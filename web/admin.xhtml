@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://java.sun.com/jsf/html">
+    <h:head>
+      
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>NoteHub - Dashboard</title>
+
+        <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="datepicker3.css"/>
+        <h:outputStylesheet library="css" name="styles.css"/>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!--Icons-->
+        <h:outputScript library="js" name="lumino.glyphs.js"/>
+
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </h:head>
+
+    <h:body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><span>NoteHub</span>Admin</a>
+                    <ul class="user-menu">
+                        <li class="dropdown pull-right">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> User <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><svg class="glyph stroked male-user"><use href="#stroked-male-user"></use></svg> Profile</a></li>
+                                <li><a href="#"><svg class="glyph stroked gear"><use href="#stroked-gear"></use></svg> Settings</a></li>
+                                <li><a href="#"><svg class="glyph stroked cancel"><use href="#stroked-cancel"></use></svg> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+          <h:form>
+            <ul class="nav menu">
+              <li><br/></li>
+          <li class="active"><a href="admin.xhtml"><svg class="glyph stroked dashboard-dial"></svg> Kontrol Paneli</a></li>
+          <li><br/></li>
+          <li ><a href="charts.xhtml"><svg class="glyph stroked calendar"></svg> Dökümanlar</a></li>
+          <li><br/></li>
+          <li ><a href="user_charts.xhtml"><svg class="glyph stroked line-graph"></svg> Üyeler </a></li>
+          <li role="presentation" class="divider"></li>
+          <li ><p:commandLink style="position: relative; padding-left: 45px;" value="Çıkış" action="#{userBean.adminLogout()}" ></p:commandLink></li>
+        </ul>
+</h:form>
+        </div><!--/.sidebar-->
+
+        <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a href="#"><svg class="glyph stroked home"><use  href="#stroked-home"></use></svg></a></li>
+                    <li class="active">Icons</li>
+                </ol>
+            </div><!--/.row-->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+            </div><!--/.row-->
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="panel panel-blue panel-widget ">
+                        <div class="row no-padding">
+                            <div class="col-sm-3 col-lg-5 widget-left">
+                                <svg class="glyph stroked bag"><use  href="#stroked-bag"></use></svg>
+                            </div>
+                            <div class="col-sm-9 col-lg-7 widget-right">
+                                <div class="large">#{documentBean.document_list_all.size()}</div>
+                                <div class="text-muted">Documents</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="panel panel-orange panel-widget">
+                        <div class="row no-padding">
+                            <div class="col-sm-3 col-lg-5 widget-left">
+                                <svg class="glyph stroked empty-message"><use  href="#stroked-empty-message"></use></svg>
+                            </div>
+                            <div class="col-sm-9 col-lg-7 widget-right">
+                                <div class="large">52</div>
+                                <div class="text-muted">Comments</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="panel panel-teal panel-widget">
+                        <div class="row no-padding">
+                            <div class="col-sm-3 col-lg-5 widget-left">
+                                <svg class="glyph stroked male-user"><use  href="#stroked-male-user"></use></svg>
+                            </div>
+                            <div class="col-sm-9 col-lg-7 widget-right">
+                              <div class="large">#{userBean.dailyUsers().size()}</div>
+                                <div class="text-muted">New Users</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-3">
+                    <div class="panel panel-red panel-widget">
+                        <div class="row no-padding">
+                            <div class="col-sm-3 col-lg-5 widget-left">
+                                <svg class="glyph stroked app-window-with-content"><use  href="#stroked-app-window-with-content"></use></svg>
+                            </div>
+                            <div class="col-sm-9 col-lg-7 widget-right">
+                                <div class="large">#{userBean.hitCount}
+                                </div>
+                                <div class="text-muted">Page Views</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.row-->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Server Genel Durumu</div>
+                        <div id="chart_div" style="width: 400px; height: 120px;"></div> 
+                    </div>
+                </div>
+            </div><!--/.row-->
+<div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Site Traffic Overview</div>
+                        <div class="panel-body">
+                            
+                           <div class="main-chart" id="line_top_x"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.row-->
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>New Orders</h4>
+                            <div class="easypiechart" id="easypiechart-blue" data-percent="92" ><span class="percent">92%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>Comments</h4>
+                            <div class="easypiechart" id="easypiechart-orange" data-percent="65" ><span class="percent">65%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>New Users</h4>
+                            <div class="easypiechart" id="easypiechart-teal" data-percent="10" ><span class="percent">56%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-body easypiechart-panel">
+                            <h4>Visitors</h4>
+                            <div class="easypiechart" id="easypiechart-red" data-percent="27" ><span class="percent">27%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/.row-->
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <div class="panel panel-default chat">
+                        <div class="panel-heading" id="accordion"><svg class="glyph stroked two-messages"><use  href="#stroked-two-messages"></use></svg> Chat</div>
+                        <div class="panel-body">
+                            <ul >
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/80/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">John Doe</strong> <small class="text-muted">32 mins ago</small>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies. 
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="right clearfix">
+                                    <span class="chat-img pull-right">
+                                        <img src="http://placehold.it/80/dde0e6/5f6468" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="pull-left primary-font">Jane Doe</strong> <small class="text-muted">6 mins ago</small>
+                                        </div>
+                                        <p>
+                                            Mauris dignissim porta enim, sed commodo sem blandit non. Ut scelerisque sapien eu mauris faucibus ultrices. Nulla ac odio nisl. Proin est metus, interdum scelerisque quam eu, eleifend pretium nunc. Suspendisse finibus auctor lectus, eu interdum sapien.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="http://placehold.it/80/30a5ff/fff" alt="User Avatar" class="img-circle" />
+                                    </span>
+                                    <div class="chat-body clearfix">
+                                        <div class="header">
+                                            <strong class="primary-font">John Doe</strong> <small class="text-muted">32 mins ago</small>
+                                        </div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies. 
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-md" placeholder="Type your message here..." />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-md" id="btn-chat">Send</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!--/.col-->
+
+                <div class="col-md-4">
+                              
+                    <div class="panel panel-blue">
+                       <h:form id="todo-form">
+                        <div class="panel-heading dark-overlay"><svg class="glyph stroked clipboard-with-paper"><use  href="#stroked-clipboard-with-paper"></use></svg>Yapılacaklar Listesi</div>
+                        <h:panelGroup id="todoBlock">
+                        <div class="panel-body">
+                            <ul class="todo-list" id="list_todo">
+                              <ui:repeat value="#{systemBean.todo_list}" var="todo_item" >
+                                <li class="todo-list-item">
+                                    <div class="checkbox">
+                                        <input type="checkbox" id="checkbox" />
+                                        <label for="checkbox">#{todo_item}</label>
+                                    </div>
+                                    <div class="pull-right action-buttons">
+                                        <a href="#"><svg class="glyph stroked pencil"><use  href="#stroked-pencil"></use></svg></a>
+                                        <a href="#" class="flag"><svg class="glyph stroked flag"><use  href="#stroked-flag"></use></svg></a>
+                                        <a href="#" class="trash"><svg class="glyph stroked trash"><use  href="#stroked-trash"></use></svg></a>
+                                    </div>
+                                </li> 
+                                </ui:repeat>
+                            </ul>
+                        </div>
+                        </h:panelGroup>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                              <h:inputText id="btn-input"  styleClass="form-control input-md" value="#{systemBean.todo_item}"  pt:placeholder="Add new task" />
+                                <span class="input-group-btn">
+                                  
+                                  <h:commandButton styleClass="btn btn-primary btn-md" value="Ekle" action="#{systemBean.addTodo()}" id="btn-todo">
+                                  <f:ajax execute="todo-form" render="todoBlock" /></h:commandButton>
+                                </span>
+                            </div>
+                        </div>
+                       </h:form>
+                    </div>
+
+                </div><!--/.col-->
+            </div><!--/.row-->
+        </div>	<!--/.main-->
+
+        <h:outputScript library="js" name="jquery-1.11.1.min.js"/>
+        <h:outputScript library="js" name="bootstrap.min.js"/>
+        <h:outputScript library="js" name="chart.min.js"/>
+        <h:outputScript library="js" name="chart-data.js"/>
+        <h:outputScript library="js" name="easypiechart.js"/>
+        <h:outputScript library="js" name="easypiechart-data.js"/>
+        <h:outputScript library="js" name="bootstrap-datepicker.js"/>
+        <f:verbatim>
+         <script type="text/javascript">
+      google.charts.load('current', {'packages':['gauge', 'line']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Memory', parseInt(#{systemBean.ram_usage})],
+          ['CPU', #{systemBean.systemload}],
+          ['Disk Space', parseInt(#{systemBean.disk_usage})]
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, parseInt(#{systemBean.ram_usage}));
+          chart.draw(data, options);
+        }, 10000);
+        setInterval(function() {
+          data.setValue(1, 1, #{systemBean.systemload});
+          chart.draw(data, options);
+        }, 10000);
+        setInterval(function() {
+          data.setValue(2, 1,  parseInt(#{systemBean.disk_usage}));
+          chart.draw(data, options);
+        },10000);
+        
+         var data_line = new google.visualization.DataTable();
+      data_line.addColumn('number', 'Aylar');
+      data_line.addColumn('number', 'Döküman Sayısı');
+      data_line.addColumn('number', 'Kullanıcı Sayısı');
+
+      data_line.addRows([
+        [1,  118, 144],
+        [2,  144, 148],
+        [3,  157, 188],
+        [4,  167, 144],
+        [5,  179, 158],
+        [6,  199, 157],
+        [7,  167, 188],
+        [8,  167, 144],
+        [9,  179, 168],
+        [10,  199, 157],
+        [11,  167, 178],
+        [12,  185, 178]
+      ]);
+
+      var options_line = {
+        width: 900,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'top'}
+          }
+        }
+      };
+
+      var chart_line = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart_line.draw(data_line, options_line);
+        }
+      
+     
+      
+  
+
+    </script>	
+          
+        </f:verbatim>
+    </h:body>
+
+</html>

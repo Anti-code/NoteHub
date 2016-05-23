@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2016 10:12:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Users" table="users" catalog="notehub" optimistic-lock="version">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity" />
+        </id>
+        <property name="authority" type="string">
+            <column name="authority" length="30" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="140" not-null="true" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="80" not-null="true" />
+        </property>
+        <property name="surname" type="string">
+            <column name="surname" length="80" not-null="true" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="`e-mail`" length="140" not-null="true" />
+        </property>
+        <property name="resourceId" type="java.lang.Integer">
+            <column name="resource_id" />
+        </property>
+        <property name="registerDate" type="date">
+            <column name="register_date" length="10" not-null="true" />
+        </property>
+        <set name="documents" table="document" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="document_author" />
+            </key>
+            <one-to-many class="pojos.Document" />
+        </set>
+    </class>
+</hibernate-mapping>

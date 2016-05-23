@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2016 10:12:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Document" table="document" catalog="notehub" optimistic-lock="version">
+        <id name="iddocument" type="java.lang.Integer">
+            <column name="iddocument" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="lectures" class="pojos.Lectures" fetch="select">
+            <column name="document_category" />
+        </many-to-one>
+        <many-to-one name="users" class="pojos.Users" fetch="select">
+            <column name="document_author" />
+        </many-to-one>
+        <property name="documentInfo" type="string">
+            <column name="document_info" length="65535" />
+        </property>
+        <property name="documentLink" type="string">
+            <column name="document_link" length="65535" />
+        </property>
+        <property name="documentFormat" type="string">
+            <column name="document_format" length="45" />
+        </property>
+        <property name="postDate" type="timestamp">
+            <column name="post_date" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

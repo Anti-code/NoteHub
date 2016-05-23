@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:f="http://java.sun.com/jsf/core"      
+  xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  >
+<h:head>
+
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="css" name="normalize.css"/>
+
+</h:head>
+<f:view>
+  <h:body style="background: url('resources/img/bc.jpg' ) no-repeat;background-size:cover;">
+
+    <div class="form">
+
+      <ul class="tab-group">
+        <li class="tab active"><a href="#login">Giriş Yap</a></li>
+        <li class="tab"><a href="#signup">Kaydol</a></li>
+
+      </ul>
+
+      <div class="tab-content">
+        <div id="login">
+          <h:form id="login_form">
+            <h1>NoteHub'a Hoşgeldin</h1>
+            <div class="field-wrap">
+                <h:inputText id="email" value="#{userBean.email}" pt:placeholder="E-mail" styleClass="form-control input-sm"/>
+
+            </div>
+            <div class="field-wrap">
+
+              <div class="form-group">
+                  <h:inputSecret value="#{userBean.password_verify}" pt:placeholder="Şifre" styleClass="form-control input-sm" />
+              </div>
+            </div>
+            <p class="forgot"><a href="#">Şifreni Unuttun mu?</a></p>
+            <div class="field-wrap">
+              <div class="form-group">
+                  <p:commandButton class="btn button button-block" value="Giriş" action="#{userBean.login()}" process="@this,login_form"/>
+              </div>
+            </div>
+          </h:form>
+        </div>
+        <div id="signup">
+          <h:form id="signup_form">
+          <h3 style="color:#eeeeee;">NoteHub'a kaydolun ve yüzlerce ders notuna kolayca erişin. <small>Ücretsiz</small></h3>
+          <div class="top-row">
+            <div class="field-wrap">
+              <div class="form-group">
+                  <h:inputText value="#{userBean.new_user.name}" pt:placeholder="Ad" styleClass="form-control input-sm" required="true" validatorMessage="Geçersiz">
+                      <f:validateRegex pattern="^[A-z]+$" />
+                  </h:inputText>
+              </div>
+            </div>
+        
+            <div class="field-wrap">
+              <div class="form-group">
+                  <h:inputText value="#{userBean.new_user.surname}" pt:placeholder="Soyad" styleClass="form-control input-sm" required="true" validatorMessage="Geçersiz" >
+                      <f:validateRegex pattern="^[A-z]+$" />
+                  </h:inputText>
+              </div>
+            </div>
+          </div>
+          <div class="field-wrap">
+              <h:inputText id="email_sign" value="#{userBean.new_user.EMail}" pt:placeholder="E-mail" styleClass="form-control input-sm" required="true" label="Email" validatorMessage="E-mail geçersiz!">
+              <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+            </h:inputText>
+            <p:message for="email_sign" />
+          </div>
+          <div class="field-wrap">
+            <div class="form-group">
+                <h:inputSecret value="#{userBean.new_user.password}" pt:placeholder="Şifre" styleClass="form-control input-sm" />
+            </div>
+          </div>
+            <div class="field-wrap">
+              <div class="form-group">
+                  <h:inputSecret value="#{userBean.password_verify}" pt:placeholder="Şifre Tekrar" styleClass="form-control input-sm" />
+              </div>
+            </div>
+          <p:commandButton class="btn button button-block" value="Bitir" action="#{userBean.register()}" process="@this,signup_form"/>
+
+          </h:form>
+        </div>
+
+
+
+
+    </div><!-- tab-content -->
+    </div>
+
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js' type="text/javascript"/>
+
+    <h:outputScript library="js" name="index.js"/>
+    
+  </h:body>
+</f:view>
+</html>
+

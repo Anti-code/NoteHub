@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2016 10:12:24 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Notes" table="notes" catalog="notehub" optimistic-lock="version">
+        <id name="noteId" type="java.lang.Integer">
+            <column name="note_id" />
+            <generator class="identity" />
+        </id>
+        <property name="userId" type="int">
+            <column name="user_id" not-null="true" />
+        </property>
+        <property name="lectureId" type="int">
+            <column name="lecture_id" not-null="true" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="140" not-null="true" />
+        </property>
+        <property name="postDate" type="date">
+            <column name="post_date" length="10" not-null="true" />
+        </property>
+        <property name="resourceId" type="java.lang.Integer">
+            <column name="resource_id" />
+        </property>
+        <property name="text" type="string">
+            <column name="text" length="65535" />
+        </property>
+        <property name="code" type="string">
+            <column name="code" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+  <h:head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>NoteHub - Charts</title>
+
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="resources/css/datepicker3.css" rel="stylesheet"/>
+    <link href="resources/css/styles.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--Icons-->
+    <script src="resources/js/lumino.glyphs.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+  </h:head>
+  <f:view>
+    <h:body>
+
+
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#"><span>NoteHub</span>Admin</a>
+            <h:form>
+              <ul class="user-menu">
+                <li class="dropdown pull-right">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> #{userBean.login_user.name} <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="user/customer-account.xhtml">Profil</a></li>
+                    <li><h:commandLink value="Çıkış" action="#{userBean.logout()}"></h:commandLink></li>
+                  </ul>
+                </li>
+              </ul>
+            </h:form>
+          </div>
+
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+       
+        <ul class="nav menu">
+          <li><br/></li>
+          <li><a href="admin.xhtml"><svg class="glyph stroked dashboard-dial"></svg> Kontrol Paneli</a></li>
+          <li><br/></li>
+          <li class="active"><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Dökümanlar</a></li>
+          <li><br/></li>
+          <li ><a href="user_charts.xhtml"><svg class="glyph stroked line-graph"></svg> Üyeler </a></li>
+         
+          <li role="presentation" class="divider"></li>
+        </ul>
+
+      </div><!--/.sidebar-->
+
+      <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">	
+
+
+
+        <div class="row">
+          <div class="col-lg-12">
+
+
+          </div>
+        </div><!--/.row-->
+        <br/><hr/><br/>
+        <div class="row">
+          <div class="col-md-12 ">
+            <div class="box">
+              <h:form>
+                <div class="table-responsive">
+                  <p:dataTable styleClass="borderless"   style="margin-bottom:0" paginator="true" rows="7" selection="#{documentBean.selected_documents}" rowKey="#{doc.iddocument}" value="#{documentBean.document_list_all}" var="doc">
+
+                    <p:column  selectionMode="multiple" class="table table-striped input-group checkbox " >
+                    </p:column>
+                    <p:column width="50" class="table table-striped">    				
+                      <f:facet name="header">ID</f:facet>    			
+                      <h:outputText  value="#{doc.iddocument}"/>
+                    </p:column>
+                    <p:column width="200" class="table table-striped">
+                      <f:facet name="header">Ders</f:facet>
+                      <h:outputText value="#{doc.lectures.name}"/>
+                    </p:column>              
+                    <p:column  width="200" class="table table-striped">
+                      <f:facet name="header">Başlık</f:facet>
+                      <h:outputText value="#{doc.documentInfo}" />
+                    </p:column>
+                    <p:column class="table table-striped">
+                      <f:facet name="header">Link</f:facet>
+                      <h:outputText value="#{doc.documentLink.substring(30)}"  />
+                    </p:column>
+                    <p:column width="120" class="table table-striped">
+                      <f:facet name="header">Format</f:facet>
+                      <h:outputText value="#{doc.documentFormat}"  />
+                    </p:column>
+
+                    <p:column width="100" class="table table-striped">
+                      <f:facet name="header">Tarih</f:facet>
+                      <h:outputText value="#{doc.postDate}"  />
+                    </p:column>
+
+                  </p:dataTable> 
+                </div>
+
+
+                <div class="box-footer">
+                  <div class="pull-left">
+                    <p:commandButton class="btn btn-sm btn-sm btn-info active" value="Sil" action="#{documentBean.deleteSelectedDocuments()}"></p:commandButton>
+                    <p:commandButton type="submit" class="btn btn-sm btn-template-main btn-info active" value="Düzenle">
+                    </p:commandButton>
+                  </div>
+                </div>
+              </h:form>
+
+            </div>
+          </div>
+        </div>
+        <hr/>
+        
+        <div class='panel'>
+          <div class="panel-heading">Haftalık eklenen dökümanlar</div>
+          <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading">Sınıflara Göre Dağılım</div>
+          <div class="panel-body panel-info pa">
+            <div id="documentpiechart" ></div>
+              
+          </div>
+            
+        </div>
+        <div class="panel">
+          <div class="panel-heading">Genel Varyans</div>
+          <div id="line_top_x"></div>
+        </div>
+        
+        <hr/>
+        <br/>
+        <div class="row">
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="icon" data-mobile-iframe="true"></div>
+        </div><!--/.row-->
+      </div>	<!--/.main-->
+
+      <script src="resources/js/jquery-1.11.1.min.js"></script>
+      <script src="resources/js/bootstrap.min.js"></script>
+      <script src="resources/js/chart.min.js"></script>
+      <script src="resources/js/chart-data.js"></script>
+      <script src="resources/js/easypiechart.js"></script>
+      <script src="resources/js/easypiechart-data.js"></script>
+      <script src="resources/js/bootstrap-datepicker.js"></script>
+      <f:verbatim><script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart', 'bar', 'line']});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+
+          var data_pie = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['1.Sınıf', #{documentBean.documentByYear(1).size()}],
+            ['2.Sınıf', #{documentBean.documentByYear(2).size()}],
+            ['3.Sınıf', #{documentBean.documentByYear(3).size()}],
+            ['4.Sınıf', #{documentBean.documentByYear(4).size()}]
+          ]);
+          
+
+          var options_pie = {
+            'legend': 'left',
+            'title': '',
+            'height': 400
+          };
+
+          var chart_pie = new google.visualization.PieChart(document.getElementById('documentpiechart'));
+
+          chart_pie.draw(data_pie, options_pie);
+          
+        var data_bar = google.visualization.arrayToDataTable([
+          ['Günler', '1.sınıf', '2.sınıf', '3.sınıf', '4.sınıf'],
+          ['Pazartesi', #{documentBean.weekly(1, 2)}, #{documentBean.weekly(2, 2)}, #{documentBean.weekly(3, 2)},#{documentBean.weekly(4, 2)}],
+          ['Salı',#{documentBean.weekly(1, 3)}, #{documentBean.weekly(2, 3)}, #{documentBean.weekly(3, 3)},#{documentBean.weekly(4, 3)}],
+          ['Çarşamba', #{documentBean.weekly(1, 4)}, #{documentBean.weekly(2, 4)}, #{documentBean.weekly(3, 4)},#{documentBean.weekly(4, 4)}],
+          ['Perşembe', #{documentBean.weekly(1, 5)}, #{documentBean.weekly(2, 5)}, #{documentBean.weekly(3, 5)},#{documentBean.weekly(4, 5)}],
+          ['Cuma', #{documentBean.weekly(1, 6)}, #{documentBean.weekly(2, 6)}, #{documentBean.weekly(3, 6)},#{documentBean.weekly(4, 6)}],
+          ['Cumartesi', #{documentBean.weekly(1, 7)}, #{documentBean.weekly(2, 7)}, #{documentBean.weekly(3, 7)},#{documentBean.weekly(4, 7)}],
+          ['Pazar', #{documentBean.weekly(1, 1)}, #{documentBean.weekly(2, 1)}, #{documentBean.weekly(3, 1)},#{documentBean.weekly(4, 1)}]
+        ]);
+          var options_bar = {
+            'legend': 'left',
+            'title': '',
+            'height': 400
+          };
+          
+          var chart_bar = new google.charts.Bar(document.getElementById('columnchart_material'));
+        chart_bar.draw(data_bar, options_bar);
+        
+        
+        var data_line = new google.visualization.DataTable();
+      data_line.addColumn('number', 'Aylar');
+      data_line.addColumn('number', 'Döküman Sayısı');
+
+      data_line.addRows([
+        [1,  11.8],
+        [2,  14.4],
+        [3,  15.7],
+        [4,  16.7],
+        [5,  17.9],
+        [6,  19.9],
+        [7,   20.8]
+      ]);
+
+      var options_line = {
+        width: 900,
+        height: 500,
+        axes: {
+          x: {
+            0: {side: 'top'}
+          }
+        }
+      };
+
+      var chart_line = new google.charts.Line(document.getElementById('line_top_x'));
+
+      chart_line.draw(data_line, options_line);
+        }
+                </script></f:verbatim>
+     
+
+    </h:body>
+  </f:view>
+</html>
