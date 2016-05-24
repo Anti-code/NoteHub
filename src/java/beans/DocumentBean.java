@@ -29,6 +29,7 @@ import org.hibernate.Transaction;
 import org.jboss.weld.util.collections.ArraySet;
 import org.omnifaces.util.Faces;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.UploadedFile;
 import pojos.Document;
 import pojos.Lectures;
@@ -54,6 +55,7 @@ public class DocumentBean implements Serializable{
     private List<String> doc_formats;
     
     private Integer secilen;
+    private List<Document> edit_list;
     private Lectures doc_cat;
     private static final long serialVersionUID = 1L;
     
@@ -104,6 +106,9 @@ public class DocumentBean implements Serializable{
     
     
     public List<Document> getDocument_list_all() {
+      if(session.getTransaction().isActive()){
+        transaction.commit();
+      }
         session.beginTransaction();
         List<Document> docs = session.createQuery("from Document as d ORDER BY d.postDate DESC").list();
         session.getTransaction().commit();
@@ -249,10 +254,16 @@ public class DocumentBean implements Serializable{
     File file = new File(path);
     Faces.sendFile(file, true); 
     }
-    public void delete(Document doc) {
+    public String delete(Integer iddoc) {
+      if(session.getTransaction().isActive()){
+        transaction.commit();
+      }
         session.beginTransaction();
-        session.delete(doc);
+        Query q =session.createQuery("delete from Document as d where d.iddocument:iddoc");
+        q.setInteger("iddoc", iddoc);
+        q.executeUpdate();
         session.getTransaction().commit();
+        return "document_charts.xhtml";
 
       }
     public String deleteSelectedDocuments(){
@@ -367,4 +378,18 @@ public class DocumentBean implements Serializable{
     this.doc_formats = doc_formats;
   }
 
+  public List<Document> getEdit_list() {
+    return edit_list;
+  }
+
+  public void setEdit_list(List<Document> edit_list) {
+    this.edit_list = edit_list;
+  }
+
+     public void onRowEdit(RowEditEvent event) {
+       System.out.println("Hi");
+     }
+     
+    public void onRowCancel(RowEditEvent event) {
+    }
 }

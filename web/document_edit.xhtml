@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
+  <h:head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>NoteHub - Charts</title>
+
+    <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="resources/css/datepicker3.css" rel="stylesheet"/>
+    <link href="resources/css/styles.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!--Icons-->
+    <script src="resources/js/lumino.glyphs.js"></script>
+    <h:outputStylesheet library = "css" name = "animate.css" />
+    <h:outputStylesheet library = "css" name = "fileupload.css"  /><!-- Theme stylesheet, if possible do not edit this stylesheet -->
+    <h:outputStylesheet name = "style.default.css" library = "css" id = "theme-stylesheet" /><!-- Custom stylesheet - for your changes -->
+    <h:outputStylesheet name = "custom.css" library = "css" /><!-- Responsivity for older IE -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+  </h:head>
+  <f:view>
+    <h:body>
+
+
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+
+            <a class="navbar-brand" href="#"><span>NoteHub</span>Admin</a>
+            <h:form>
+              <ul class="user-menu">
+                <li class="dropdown pull-right">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><svg class="glyph stroked male-user"></svg> #{userBean.login_user.name} <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="user/customer-account.xhtml">Profil</a></li>
+                    <li><h:commandLink value="Çıkış" action="#{userBean.logout()}"></h:commandLink></li>
+                  </ul>
+                </li>
+              </ul>
+            </h:form>
+          </div>
+
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+
+        <ul class="nav menu">
+          <li><br/></li>
+          <li><a href="admin.xhtml"><svg class="glyph stroked dashboard-dial"></svg> Kontrol Paneli</a></li>
+          <li><br/></li>
+          <li><a href="document_charts.xhtml"><svg class="glyph stroked calendar"></svg> Dökümanlar</a></li>
+          <li><br/></li>
+          <li class="active"><a href="user_charts.xhtml"><svg class="glyph stroked line-graph"></svg> Üyeler </a></li>
+          <li role="presentation" class="divider"></li>
+          <h:form>
+            <li ><p:commandLink style="position: relative; padding-left: 45px;" value="Çıkış" action="#{userBean.adminLogout()}" ></p:commandLink></li>
+          </h:form>
+          <li role="presentation" class="divider"></li>
+        </ul>
+
+      </div><!--/.sidebar-->
+
+      <div class="col-sm-9 col-sm-offset-3 col-sm-10 col-sm-offset-2 main" style="width: 50%;">	
+
+
+        <div id="content" class="clearfix">
+          <br/> <br/> <br/>
+          
+                <h:form id="document_form" enctype="multipart/form-data">
+          <div class="file-container">
+            <div class="panel panel-default">
+              <div class="panel-body" >
+
+                <!-- Standar Form -->
+
+
+                  <div class = "form-group">
+                    <label for = "name">Başlık</label>
+                    <h:inputTextarea  class = "form-control no-collapsable" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
+                    <br/>
+                    <p:growl id="messages" showDetail="true" />
+                    <label for = "name">Ders</label>
+                    <h:selectOneMenu class="form-control no-collapsable" value="#{documentBean.secilen}">
+                      <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
+                    </h:selectOneMenu>
+
+
+                    <br/>
+                    <label for = "name">Tarih</label>
+                    <span  >
+                      <p:calendar  id="mask" style="width: 100%" value="#{calendarView.date9}"  pattern="dd-MM-yyyy" mask="true"/>
+                    </span>
+
+
+                    <br/><br/>
+                    <span class="btn btn-default btn-file" style="width: 100%">Dökümanın yolunu seç
+                      <p:fileUpload class="form-control no-collapsable" mode="simple" process="@form" update="document_form" fileUploadListener="#{documentBean.fileSelected(event)}" value="#{documentBean.document_file}">
+
+                      </p:fileUpload>
+                    </span>
+                    
+                    
+
+
+                  </div>
+
+
+
+                  
+              </div>
+            </div>
+            <p:commandButton value="Kaydet" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-template-main form-control active" id="js-upload-submit" style="width: 100%">
+                  </p:commandButton>
+          </div> <!-- /container -->
+                </h:form>
+
+        </div>
+        <hr/>
+        <br/>
+        <div class="row">
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="icon" data-mobile-iframe="true"></div>
+        </div><!--/.row-->
+      </div>	<!--/.main-->
+
+      <script src="resources/js/jquery-1.11.1.min.js"></script>
+      <script src="resources/js/bootstrap.min.js"></script>
+      <script src="resources/js/chart.min.js"></script>
+      <script src="resources/js/chart-data.js"></script>
+      <script src="resources/js/easypiechart.js"></script>
+      <script src="resources/js/easypiechart-data.js"></script>
+      <script src="resources/js/bootstrap-datepicker.js"></script>
+
+    </h:body>
+  </f:view>
+</html>
