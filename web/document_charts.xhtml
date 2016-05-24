@@ -61,7 +61,7 @@
           <li><br/></li>
           <li><a href="admin.xhtml"><svg class="glyph stroked dashboard-dial"></svg> Kontrol Paneli</a></li>
           <li><br/></li>
-          <li class="active"><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Dökümanlar</a></li>
+          <li class="active"><a href="#"><svg class="glyph stroked calendar"></svg> Dökümanlar</a></li>
           <li><br/></li>
           <li ><a href="user_charts.xhtml"><svg class="glyph stroked line-graph"></svg> Üyeler </a></li>
           <li role="presentation" class="divider"></li>
@@ -87,12 +87,11 @@
         <div class="row">
           <div class="col-md-12 ">
             <div class="box">
-              <h:form id="form">
+              <h:form id="doc_form">
                 <p:growl id="msgs" showDetail="true"/>
                 <div class="table-responsive">
-                  <p:dataTable styleClass="borderless" editable="true"  style="margin-bottom:0" paginator="true" rows="7" selection="#{documentBean.selected_documents}" rowKey="#{doc.iddocument}" value="#{documentBean.document_list_all}" var="doc">
-                    <p:ajax event="rowEdit" listener="#{documentBean.onRowEdit}" update=":form:msgs"/>
-                    <p:ajax event="rowEditCancel" listener="#{documentBean.onRowCancel}" update=":form:msgs"/>
+                  <p:dataTable id="content-table" styleClass="borderless" editable="true"  style="margin-bottom:0" paginator="true" rows="7" selection="#{documentBean.selected_documents}" rowKey="#{doc.iddocument}" value="#{documentBean.document_list_all}" var="doc">
+                    <p:ajax event="rowEdit" listener="#{documentBean.onRowEdit}"  update="@this,content-table"/>
 
  
                     <p:column headerText="ID" width="50" class="table table-striped">
@@ -125,20 +124,13 @@
                     </p:column> 
 
                     <p:column headerText="Tarih" width="70" class="table table-striped">
-                      <p:cellEditor>
-                        <f:facet name="output"><h:outputText  value="#{doc.postDate}"/>
-                        </f:facet>
-                        <f:facet name="input"><p:calendar value="#{doc.postDate}"/>
-                          
-                        
-                        </f:facet>
-                      </p:cellEditor>
+                      <h:outputText  value="#{doc.postDate}"/>
                     </p:column> 
                     <p:column style="width:32px">
                       <p:rowEditor />
                     </p:column>
                     <p:column style="width: 32px;">
-                      <p:commandButton icon="ui-icon-trash" style="border:none;" ></p:commandButton>
+                      <p:commandButton icon="ui-icon-trash" style="border:none;" update="@form" action="#{documentBean.delete(doc)}"></p:commandButton>
                     </p:column>
                       
                   </p:dataTable> 

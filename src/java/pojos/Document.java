@@ -86,10 +86,6 @@ public class Document  implements java.io.Serializable {
         this.postDate = postDate;
     }
 
-
-
-
-
 }
 
 

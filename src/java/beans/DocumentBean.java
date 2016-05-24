@@ -12,6 +12,8 @@ import java.io.Serializable;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -234,7 +236,6 @@ public class DocumentBean implements Serializable{
                 }
                 
                 
-                
                 FacesMessage message = new FacesMessage("Dosya başarıyla eklendi");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 return "index.xhtml?faces-redirect=true";
@@ -254,16 +255,13 @@ public class DocumentBean implements Serializable{
     File file = new File(path);
     Faces.sendFile(file, true); 
     }
-    public String delete(Integer iddoc) {
+    public void delete(Document iddoc) {
       if(session.getTransaction().isActive()){
         transaction.commit();
       }
         session.beginTransaction();
-        Query q =session.createQuery("delete from Document as d where d.iddocument:iddoc");
-        q.setInteger("iddoc", iddoc);
-        q.executeUpdate();
+        session.delete(iddoc);
         session.getTransaction().commit();
-        return "document_charts.xhtml";
 
       }
     public String deleteSelectedDocuments(){
@@ -387,9 +385,15 @@ public class DocumentBean implements Serializable{
   }
 
      public void onRowEdit(RowEditEvent event) {
-       System.out.println("Hi");
+       if(session.getTransaction().isActive()){
+         session.getTransaction().commit();
+       }
+       Document d=(Document)event.getObject();
+       d.setPostDate(new Date(new Timestamp(System.currentTimeMillis()).getTime()));
+       session.beginTransaction();
+       session.update(d);
+       session.getTransaction().commit();
+       System.out.println("Success");
      }
      
-    public void onRowCancel(RowEditEvent event) {
-    }
 }

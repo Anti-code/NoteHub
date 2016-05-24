@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.primefaces.event.RowEditEvent;
 import pojos.Document;
 import pojos.Users;
 import util.HibernateUtil;
@@ -57,7 +59,15 @@ public class UserBean implements Serializable {
       hibernate_session.getTransaction().commit();
       return "user_charts.xhtml?faces-redirect=true";
   }
-
+    public void onRowEdit(RowEditEvent event) {
+       if(hibernate_session.getTransaction().isActive()){
+         hibernate_session.getTransaction().commit();
+       }
+       hibernate_session.beginTransaction();
+       hibernate_session.update((Users)event.getObject());
+       hibernate_session.getTransaction().commit();
+       System.out.println("Success");
+     }
   public String register() {
     try {
       hibernate_session = hibernate_util.getSessionFactory().openSession();
