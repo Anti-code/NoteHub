@@ -86,43 +86,72 @@
             <div class="box">
               <h:form>
                 <div class="table-responsive">
-                  <p:dataTable styleClass="borderless"   style="margin-bottom:0; padding-right: 5px;" paginator="true" rows="7" selection="#{userBean.selected_users}" rowKey="#{user.userId}" value="#{userBean.user_list}" var="user">
+                  <p:dataTable id="content-table" styleClass="borderless" editable="true"  style="margin-bottom:0" paginator="true" rows="7" selection="#{userBean.selected_users}" rowKey="#{user.userId}" value="#{userBean.user_list}" var="user">
+                    <p:ajax event="rowEdit" listener="#{userBean.onRowEdit}"  update="@this,content-table"/>
 
-                    <p:column  width="20px" selectionMode="multiple" class="table table-striped input-group checkbox " >
-                    </p:column>
-                    <p:column width="50"  class="table table-striped">    				
-                      <f:facet  name="header">ID</f:facet>    			
-                      <h:outputText style="width: 50px;"  value="#{user.userId}"/>
-                    </p:column>
-                    <p:column width="70" class="table table-striped">
-                      <f:facet name="header">Yetki</f:facet>
-                      <h:outputText value="#{user.authority}"/>
-                    </p:column>              
-                    <p:column  width="200" class="table table-striped">
-                      <f:facet name="header">Şifre</f:facet>
-                      <h:outputText value="#{user.password}" />
-                    </p:column>
-                    <p:column width="150" class="table table-striped">
-                      <f:facet name="header">İsim</f:facet>
-                      <h:outputText value="#{user.name}"  />
-                    </p:column>
-                    <p:column width="150" class="table table-striped">
-                      <f:facet name="header">Soyisim</f:facet>
-                      <h:outputText value="#{user.surname}"  />
-                    </p:column>
-                    <p:column width="300" class="table table-striped">
-                      <f:facet name="header">Email</f:facet>
-                      <h:outputText value="#{user.EMail}"  />
-                    </p:column>
-                    <p:column width="50" class="table table-striped">
-                      <f:facet name="header">Katkı</f:facet>
-                      <h:outputText value="#{user.documents.size()}"  />
-                    </p:column>
-                    <p:column width="120" class="table table-striped">
-                      <f:facet name="header">Tarih</f:facet>
-                      <h:outputText value="#{user.registerDate}"  />
+ 
+                    <p:column headerText="ID" width="50" class="table table-striped">
+                      <p:cellEditor>   			
+                        <f:facet name="output"><h:outputText value="#{user.userId}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{user.userId}" style="width:100%"/></f:facet>
+
+                      </p:cellEditor>
                     </p:column>
 
+                    <p:column headerText="Ders" width="150" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.authority}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.authority}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column>       
+
+                    <p:column headerText="Başlık" width="200" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.password}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.password}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column> 
+
+                    <p:column headerText="Link" width="250" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.name}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.name}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column> 
+                    <p:column headerText="Link" width="250" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.surname}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.surname}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column> 
+                    <p:column headerText="Link" width="250" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.EMail}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.EMail}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Link" width="250" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.documents.size()}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.documents.size()}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column> 
+                    <p:column headerText="Link" width="250" class="table table-striped">
+                      <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{user.registerDate}"/></f:facet>
+                        <f:facet name="input"><h:inputText value="#{user.registerDate}"/></f:facet>
+                      </p:cellEditor>
+                    </p:column> 
+                    <p:column headerText="Tarih" width="70" class="table table-striped">
+                      <h:outputText  value="#{doc.postDate}"/>
+                    </p:column> 
+                    <p:column style="width:32px">
+                      <p:rowEditor />
+                    </p:column>
+                    <p:column style="width: 32px;">
+                      <p:commandButton icon="ui-icon-trash" style="border:none;" update="@form" action="#{documentBean.delete(doc)}"></p:commandButton>
+                    </p:column>
+                      
                   </p:dataTable> 
                 </div>
 
