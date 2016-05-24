@@ -53,300 +53,233 @@
 
               <div class="container">
 
-                
+
                 <!--/.navbar-header -->
 
                 <div class="navbar-collapse collapse" id="navigation">
                   <h:form enctype="multipart/form-data">
-                  <h:commandLink class="nav navbar-nav navbar-left" action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
-                    NoteHub</h2></h:commandLink>
+                    <h:commandLink class="nav navbar-nav navbar-left" action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
+                        NoteHub</h2></h:commandLink>
 
-                  <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
 
-                    <li class="btn-default" >
+                      <li class="btn-default" >
 
-                      <h:commandLink action="#{documentBean.loadLatest()}" class="btn-default" >Anasayfa</h:commandLink>
+                        <h:commandLink action="#{documentBean.loadLatest()}" class="btn-default" >Anasayfa</h:commandLink>
 
-                    </li>
+                      </li>
 
-                    <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                    <li class="dropdown use-yamm yamm-fw">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li>
+                      <!-- ========== FULL WIDTH MEGAMENU ================== -->
+                      <li class="dropdown use-yamm yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li>
 
-                          <div class="yamm-content">
-                            <div class="row">
-                              <div class="col-sm-3">
-                                <h5>1.Sınıf 1.Dönem</h5>
-                                <ul>
-                                  <li><a href="index_1.html">Option 1: Default Page</a>
-                                  </li>
-                                  <li><a href="index2.html">Option 2: Application</a>
-                                  </li>
-                                  <li><a href="index3.html">Option 3: Startup</a>
-                                  </li>
-                                  <li><a href="index_1.html">Option 4: Agency</a>
-                                  </li>
-                                  <li><a href="index5.html">Option 5: Portfolio</a>
-                                  </li>
-                                </ul>
-                                <h5>1.Sınıf 2.Dönem</h5>
-                                <ul>
-                                  <li><a href="about.html">About us</a>
-                                  </li>
-                                  <li><a href="team.html">Our team</a>
-                                  </li>
-                                  <li><a href="team-member.html">Team member</a>
-                                  </li>
-                                  <li><a href="services.html">Services</a>
-                                  </li>
-                                </ul>
-                                <ul>
-                                  <li><a href="packages.html">Packages</a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="col-sm-3">
-                                <h5>2.Sınıf</h5>
-                                <ul>
-                                  <li><a href="portfolio-2.html">2 columns</a>
-                                  </li>
-                                  <li><a href="portfolio-no-space-2.html">2 columns with negative space</a>
-                                  </li>
-                                  <li><a href="portfolio-3.html">3 columns</a>
-                                  </li>
-                                  <li><a href="portfolio-no-space-3.html">3 columns with negative space</a>
-                                  </li>
-                                  <li><a href="portfolio-4.html">4 columns</a>
-                                  </li>
-                                  <li><a href="portfolio-no-space-4.html">4 columns with negative space</a>
-                                  </li>
-                                  <li><a href="portfolio-detail.html">Portfolio - detail</a>
-                                  </li>
-                                  <li><a href="portfolio-detail-2.html">Portfolio - detail 2</a>
-                                  </li>
-                                </ul>
-                                <h5>1.Sınıf 2.Dönem</h5>
-                                <ul>
-                                  <li><a href="customer-register.html">Register / login</a>
-                                  </li>
-                                  <li><a href="customer-orders.html">Orders history</a>
-                                  </li>
-                                  <li><a href="customer-order.html">Order history detail</a>
-                                  </li>
-                                  <li><a href="customer-wishlist.html">Wishlist</a>
-                                  </li>
-                                  <li><a href="customer-account.html">Customer account / change password</a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="col-sm-3">
-                                <h5>3.Sınıf 1.Dönem</h5>
-                                <ul>
-                                  <li><a href="shop-category.html">Category - sidebar right</a>
-                                  </li>
-                                  <li><a href="shop-category-left.html">Category - sidebar left</a>
-                                  </li>
-                                  <li><a href="shop-category-full.html">Category - full width</a>
-                                  </li>
-                                  <li><a href="shop-detail.html">Product detail</a>
-                                  </li>
-                                </ul>
-                                <h5>3.Sınıf 2.Dönem</h5>
-                                <ul>
-                                  <li><a href="shop-basket.html">Shopping cart</a>
-                                  </li>
-                                  <li><a href="shop-checkout1.html">Checkout - step 1</a>
-                                  </li>
-                                  <li><a href="shop-checkout2.html">Checkout - step 2</a>
-                                  </li>
-                                  <li><a href="shop-checkout3.html">Checkout - step 3</a>
-                                  </li>
-                                  <li><a href="shop-checkout4.html">Checkout - step 4</a>
-                                  </li>
-                                </ul>
-                              </div>
-                              <div class="col-sm-3">
-                                <h5>4.Sınıf 1.Dönem</h5>
-                                <ul>
-                                  <li><a href="text.html">Text page</a>
-                                  </li>
-                                  <li><a href="text-left.html">Text page - left sidebar</a>
-                                  </li>
-                                  <li><a href="text-full.html">Text page - full width</a>
-                                  </li>
-                                  <li><a href="faq.html">FAQ</a>
-                                  </li>
-                                  <li><a href="404.html">404 page</a>
-                                  </li>
-                                </ul>
-                                <h5>4.Sınıf 2.Dönem</h5>
-                                <ul>
-                                  <li><a href="blog.html">Blog listing big</a>
-                                  </li>
-                                  <li><a href="blog-medium.html">Blog listing medium</a>
-                                  </li>
-                                  <li><a href="main.html">Blog listing small</a>
-                                  </li>
-                                  <li><a href="blog-post.html">Blog Post</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- /.yamm-content -->
-                        </li>
-                      </ul>
-                    </li>
-                    <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+                            <div class="yamm-content">
+                              <div class="row">
+                                <div class="col-sm-3">
+                                  <h5>1.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec1" value="#{lectureBean.lecture_list1}">
+                                      <li><h:commandLink value="#{lec1.name}" action="#{documentBean.documentByLecture(lec1.lectureId)}" >
 
-                    <li class="dropdown ">
-                      <a id="root"  class="dropdown-toggle" data-toggle="dropdown" data-target="#root" >Katkıda Bulun<b class="caret"></b></a>
-                      <ul class="dropdown-menu file-width"  >
-                        <li>
-                          <div class="yamm-content">
-                            <div class="row">
-
-                              <div class="col-md-12">
-                                <h5><strong>Döküman Ekleme</strong></h5>
-                                <ul>
-                                  <li>
-                                    <div class="file-container">
-                                      <div class="panel panel-default">
-                                        <div class="panel-body">
-
-                                          <!-- Standar Form -->
-
-                                          <h:form id="document_form" enctype="multipart/form-data">
-
-                                            <div class = "form-group">
-                                              <label for = "name">Başlık</label>
-                                              <h:inputTextarea  class = "form-control" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
-                                              <br/>
-                                              <p:growl id="messages" showDetail="true" />
-                                              <label for = "name">Ders</label>
-                                              <h:selectOneMenu class="form-control" value="#{documentBean.secilen}">
-                                                <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
-                                              </h:selectOneMenu>
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
 
 
-                                              <br/>
-
-
-
-                                              <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
-                                                <p:fileUpload class="form-control" mode="simple" process="@form" update="@form" fileUploadListener="#{documentBean.fileSelected()}" value="#{documentBean.document_file}">
-
-                                                </p:fileUpload>>
-                                              </span>
-
-                                            </div>
-
-                                            <h:panelGroup id="outputMessage" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
-                                              <div class="js-upload-finished">
-
-                                                <div class="list-group">
-                                                  <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
-                                                </div>
-                                              </div>
-                                            </h:panelGroup>
-
-                                            <p:commandButton value="Submit" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
-                                            </p:commandButton>
-                                          </h:form>
-                                        </div>
-                                      </div>
-                                    </div> <!-- /container -->
-                                  </li>
-
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-
-
-                   
-
-
-                    <li class="dropdown">
-
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><h:outputText value="#{userBean.login_user.name}" /><b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="#{userBean.profile()}"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope">Mesajlar</i> <b class="caret"></b></a>
-                          <ul class="dropdown-menu message-dropdown">
-                            <li class="message-preview">
-                              <a href="#">
-                                <div class="media">
-                                  <span class="pull-left">
-                                    <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                  </span>
-                                  <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                  </div>
                                 </div>
-                              </a>
-                            </li>
-                            <li class="message-footer">
-                              <a href="#">Read All New Messages</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li class="dropdown-toggle">
-                          <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell">Bildirimler</i> <b class="caret"></b></a>
-                          <ul class="dropdown-menu alert-dropdown">
-                            <li>
-                              <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                              <a href="#">View All</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <h:outputLink value="#{userBean.logout()}" ><i class="fa fa-fw fa-power-off"></i> Log Out</h:outputLink>
-                        </li>
-                      </ul>
+                                <div class="col-sm-3">
+                                  <h5>2.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec2" value="#{lectureBean.lecture_list2}">
+                                      <li><h:commandLink value="#{lec2.name}" action="#{documentBean.documentByLecture(lec2.lectureId)}" >
 
-                    </li>
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
 
-                  </ul>
+                                </div>
+                                <div class="col-sm-3">
+                                  <h5>3.Sınıf</h5>
 
-</h:form>
+                                  <ul>
+                                    <ui:repeat var="lec3" value="#{lectureBean.lecture_list3}">
+                                      <li><h:commandLink value="#{lec3.name}" action="#{documentBean.documentByLecture(lec3.lectureId)}" >
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+                                </div>
+                                <div class="col-sm-3">
+                                  <h5>4.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec4" value="#{lectureBean.lecture_list4}">
+                                      <li><h:commandLink value="#{lec4.name}" action="#{documentBean.documentByLecture(lec4.lectureId)}" >
+
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /.yamm-content -->
+                          </li>
+                        </ul>
+                      </li>
+                      <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+
+                      <li class="dropdown ">
+                        <a id="root"  class="dropdown-toggle" data-toggle="dropdown" data-target="#root" >Katkıda Bulun<b class="caret"></b></a>
+                        <ul class="dropdown-menu file-width"  >
+                          <li>
+                            <div class="yamm-content">
+                              <div class="row">
+
+                                <div class="col-md-12">
+                                  <h5><strong>Döküman Ekleme</strong></h5>
+                                  <ul>
+                                    <li>
+                                      <div class="file-container">
+                                        <div class="panel panel-default">
+                                          <div class="panel-body">
+
+                                            <!-- Standar Form -->
+
+                                            <h:form id="document_form" enctype="multipart/form-data">
+
+                                              <div class = "form-group">
+                                                <label for = "name">Başlık</label>
+                                                <h:inputTextarea  class = "form-control no-collapsable" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
+                                                <br/>
+                                                <p:growl id="messages" showDetail="true" />
+                                                <label for = "name">Ders</label>
+                                                <h:selectOneMenu class="form-control no-collapsable" value="#{documentBean.secilen}">
+                                                  <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
+                                                </h:selectOneMenu>
+
+
+                                                <br/>
+
+
+
+                                                <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
+                                                  <p:fileUpload class="form-control no-collapsable" mode="simple" process="@form" update="document_form" fileUploadListener="#{documentBean.fileSelected(event)}" value="#{documentBean.document_file}">
+
+                                                  </p:fileUpload>>
+                                                </span>
+
+                                              </div>
+
+                                              <h:panelGroup id="outputMessage" class="no-collapsable" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
+                                                <div class="js-upload-finished">
+
+                                                  <div class="list-group">
+                                                    <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
+                                                  </div>
+                                                </div>
+                                              </h:panelGroup>
+
+                                              <p:commandButton value="Submit" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
+                                              </p:commandButton>
+                                            </h:form>
+                                          </div>
+                                        </div>
+                                      </div> <!-- /container -->
+                                    </li>
+
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+
+
+
+
+
+                      <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><h:outputText value="#{userBean.login_user.name}" /><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="#{userBean.profile()}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                          </li>
+
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope">Mesajlar</i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu message-dropdown">
+                              <li class="message-preview">
+                                <a href="#">
+                                  <div class="media">
+                                    <span class="pull-left">
+                                      <img class="media-object" src="http://placehold.it/50x50" alt=""/>
+                                    </span>
+                                    <div class="media-body">
+                                      <h5 class="media-heading"><strong>John Smith</strong>
+                                      </h5>
+                                      <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                  </div>
+                                </a>
+                              </li>
+                              <li class="message-footer">
+                                <a href="#">Read All New Messages</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="dropdown-toggle">
+                            <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell">Bildirimler</i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu alert-dropdown">
+                              <li>
+                                <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="#">View All</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                            <h:outputLink value="#{userBean.logout()}" ><i class="fa fa-fw fa-power-off"></i> Log Out</h:outputLink>
+                          </li>
+                        </ul>
+
+                      </li>
+
+                    </ul>
+
+                  </h:form>
                 </div>
                 <!--/.nav-collapse -->
 
@@ -454,17 +387,17 @@ ______________________________________________________ -->
 
 
 
-                  <ui:fragment rendered="#{documentBean.document_list.size() gt 11}">
-   <div class="pages">
+                  <ui:fragment rendered="#{documentBean.document_list.size() gt 8}">
+                    <div class="pages">
 
-                    <p class="loadMore">
-                      <p:commandLink  value="Load more" action="#{documentBean.loadMore()}" ajax="true" update="content-table" class="btn btn-template-main"> </p:commandLink>
-                    </p>
+                      <p class="loadMore">
+                        <p:commandLink  value="Load more" action="#{documentBean.loadMore()}" ajax="true" update="content-table" class="btn btn-template-main"> </p:commandLink>
+                      </p>
 
 
-                  </div>
-</ui:fragment>
-                  
+                    </div>
+                  </ui:fragment>
+
                 </h:form>
                 <!-- /.container -->
 
@@ -556,11 +489,11 @@ _________________________________________________________ -->
                       <div class="form-group">
 
                         <h:selectManyCheckbox layout="pageDirection" value="#{documentBean.doc_formats}">
-                            <f:selectItems  value="#{documentBean.listToSet()}"
-                 var="doc_format"
-                 itemValue="#{doc_format}"
-                 itemLabel="#{doc_format}"
-                 itemLabelEscaped="true"/>
+                          <f:selectItems  value="#{documentBean.listToSet()}"
+                                          var="doc_format"
+                                          itemValue="#{doc_format}"
+                                          itemLabel="#{doc_format}"
+                                          itemLabelEscaped="true"/>
                         </h:selectManyCheckbox>
 
                         <p:commandButton value="Uygula" class="btn btn-default btn-sm btn-template-main" ajax="false" action="#{documentBean.documentByFormat()}"> </p:commandButton>
@@ -590,50 +523,50 @@ _________________________________________________________ -->
 
 
 
-                <section class="bar background-pentagon no-mb">
-                  <div class="container">
-                    <div class="row showcase">
-                      <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                          <div class="icon"><i class="fa fa-align-justify"></i>
-                          </div>
-                          <h4><span class="counter">#{documentBean.document_list_all.size()}</span><br/>
-
-                            Websites</h4>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                          <div class="icon"><i class="fa fa-users"></i>
-                          </div>
-                          <h4><span class="counter">100</span><br/>
-
-                            Satisfied Clients</h4>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                          <div class="icon"><i class="fa fa-copy"></i>
-                          </div>
-                          <h4><span class="counter">320</span><br/>
-
-                            Projects</h4>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                          <div class="icon"><i class="fa fa-font"></i>
-                          </div>
-                          <h4><span class="counter">923</span><br/> 
-
-                            Magazines and Brochures</h4>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.row -->
+        <section class="bar background-pentagon no-mb">
+          <div class="container">
+            <div class="row showcase">
+              <div class="col-md-3 col-sm-6">
+                <div class="item">
+                  <div class="icon"><i class="fa fa-align-justify"></i>
                   </div>
-                  <!-- /.container -->
-                </section>
+                  <h4><span class="counter">#{documentBean.document_list_all.size()}</span><br/>
+
+                    Websites</h4>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="item">
+                  <div class="icon"><i class="fa fa-users"></i>
+                  </div>
+                  <h4><span class="counter">100</span><br/>
+
+                    Satisfied Clients</h4>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="item">
+                  <div class="icon"><i class="fa fa-copy"></i>
+                  </div>
+                  <h4><span class="counter">320</span><br/>
+
+                    Projects</h4>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="item">
+                  <div class="icon"><i class="fa fa-font"></i>
+                  </div>
+                  <h4><span class="counter">923</span><br/> 
+
+                    Magazines and Brochures</h4>
+                </div>
+              </div>
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container -->
+        </section>
 
         <!-- *** FOOTER ***
 _________________________________________________________ -->
@@ -647,7 +580,7 @@ _________________________________________________________ -->
 
               <hr></hr>
 
-              
+
 
               <hr class="hidden-md hidden-lg hidden-sm"/>
 
@@ -761,6 +694,9 @@ _________________________________________________________ -->
           $('.sinif').click(function () {
             $(this).toggleClass('active');
 
+          });
+          $('.no-collapsable').on('click', function (e) {
+            e.stopPropagation();
           });
         </script>
       </f:verbatim>

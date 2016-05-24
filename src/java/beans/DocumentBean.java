@@ -77,7 +77,7 @@ public class DocumentBean implements Serializable{
   public String loadLatest(){
     session.beginTransaction();
     Query q=session.createQuery("from Document as d  ORDER BY d.postDate DESC");
-    q.setMaxResults(12);
+    q.setMaxResults(10);
     document_list=q.list();
     session.getTransaction().commit();
     return "index.xhtml?faces-redirect=true";
@@ -143,7 +143,12 @@ public class DocumentBean implements Serializable{
         if(session.getTransaction().isActive()){
       transaction.commit();
     }
-        List<Document> dl=new ArrayList<>();
+        if(doc_formats.isEmpty()){
+          loadLatest();
+        }
+        else{
+          
+        
         session.beginTransaction();
         this.document_list.clear();
         for(Document d: (List<Document>)session.createQuery("from Document as d order by d.postDate DESC").list()){
@@ -151,8 +156,8 @@ public class DocumentBean implements Serializable{
           this.document_list.add(d);
           }
         }
-        
         session.getTransaction().commit();
+        }
     }
     
     public List<Document> documentByYear(Integer year){
