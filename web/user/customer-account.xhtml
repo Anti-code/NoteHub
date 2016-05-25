@@ -64,259 +64,32 @@
                   <h:form enctype="multipart/form-data">
                    <a  class="nav navbar-nav navbar-left" href="index.xhtml"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
                            NoteHub</h2></a>
-                  <ul class="nav navbar-nav navbar-right">
                     
-                    <li class="btn-default" >
+                    <ul class="nav navbar-nav navbar-right">
+
+                      <li class="btn-default" >
+
+                        <h:commandLink action="#{documentBean.loadLatest()}" class="btn-default" >Anasayfa</h:commandLink>
+
+                      </li>
+
                       
-                      <a href="index.xhtml" class="btn-default" >Anasayfa</a>
-
-                    </li>
-                    
-                    <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                    <li class="dropdown use-yamm yamm-fw">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
-                      <ul class="dropdown-menu" >
-                          <li>
-
-                            <div class="yamm-content">
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h5>1.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec1" value="#{lectureBean.lecture_list1}">
-                                      <li><h:commandLink value="#{lec1.name}" action="#{documentBean.documentByLecture(lec1.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-
-
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>2.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec2" value="#{lectureBean.lecture_list2}">
-                                      <li><h:commandLink value="#{lec2.name}" action="#{documentBean.documentByLecture(lec2.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>3.Sınıf</h5>
-
-                                  <ul>
-                                    <ui:repeat var="lec3" value="#{lectureBean.lecture_list3}">
-                                      <li><h:commandLink value="#{lec3.name}" action="#{documentBean.documentByLecture(lec3.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>4.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec4" value="#{lectureBean.lecture_list4}">
-                                      <li><h:commandLink value="#{lec4.name}" action="#{documentBean.documentByLecture(lec4.lectureId)}" >
-
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /.yamm-content -->
-                          </li>
-                        </ul>
-                    </li>
-                    <!-- ========== FULL WIDTH MEGAMENU END ================== -->
-
-                    <li class="dropdown ">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Katkıda Bulun<b class="caret"></b></a>
-                      <ul class="dropdown-menu file-width">
-                        <li>
-                          <div class="yamm-content">
-                            <div class="row">
-
-                              <div class="col-md-12">
-                                <h5><strong>Döküman Ekleme</strong></h5>
-                                <ul>
-                                  <li>
-                                    <div class="file-container">
-                                      <div class="panel panel-default">
-                                        <div class="panel-body">
-
-                                          <!-- Standar Form -->
-
-                                          <h:form id="document_form" enctype="multipart/form-data">
-
-                                            <div class = "form-group">
-                                              <label for = "name">Başlık</label>
-                                              <h:inputTextarea  class = "form-control" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
-                                              <br/>
-                                              <p:growl id="messages" showDetail="true" />
-                                              <label for = "name">Ders</label>
-                                              <h:selectOneMenu class="form-control" value="#{documentBean.secilen}">
-                                                <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
-                                              </h:selectOneMenu>
-
-
-                                              <br/>
+                      
 
 
 
-                                              <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
-                                                <p:fileUpload class="form-control" mode="simple" process="@form" update="@form" fileUploadListener="#{documentBean.fileSelected()}" value="#{documentBean.document_file}">
 
-                                                </p:fileUpload>>
-                                              </span>
+                     
+                      <li class="btn-default" >
 
-                                            </div>
+                        <h:commandLink action="#{userBean.profile()}" class="btn-default" >#{userBean.login_user.name}</h:commandLink>
 
-                                            <h:panelGroup id="outputMessage" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
-                                              <div class="js-upload-finished">
+                      </li>
 
-                                                <div class="list-group">
-                                                  <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
-                                                </div>
-                                              </div>
-                                            </h:panelGroup>
-
-                                            <p:commandButton value="Submit" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
-                                            </p:commandButton>
-                                          </h:form>
-                                        </div>
-                                      </div>
-                                    </div> <!-- /container -->
-                                  </li>
-
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-
-
-                    <li >
-                      <a href="javascript: void(0)" class="btn-default" >SORU CEVAP</a>
-
-                    </li>
-
-
-                    <li class="dropdown">
-
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><h:outputText value="#{userBean.login_user.name}" /><b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li>
-                          <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope">Mesajlar</i> <b class="caret"></b></a>
-                          <ul class="dropdown-menu message-dropdown">
-                            <li class="message-preview">
-                              <a href="#">
-                                <div class="media">
-                                  <span class="pull-left">
-                                    <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                  </span>
-                                  <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                  </div>
-                                </div>
-                              </a>
-                            </li>
-                            <li class="message-preview">
-                              <a href="#">
-                                <div class="media">
-                                  <span class="pull-left">
-                                    <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                  </span>
-                                  <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                  </div>
-                                </div>
-                              </a>
-                            </li>
-                            <li class="message-preview">
-                              <a href="#">
-                                <div class="media">
-                                  <span class="pull-left">
-                                    <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                  </span>
-                                  <div class="media-body">
-                                    <h5 class="media-heading"><strong>John Smith</strong>
-                                    </h5>
-                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                  </div>
-                                </div>
-                              </a>
-                            </li>
-                            <li class="message-footer">
-                              <a href="#">Read All New Messages</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li class="dropdown-toggle">
-                          <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell">Bildirimler</i> <b class="caret"></b></a>
-                          <ul class="dropdown-menu alert-dropdown">
-                            <li>
-                              <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                            </li>
-                            <li>
-                              <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                              <a href="#">View All</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                          <h:outputLink value="#{userBean.logout()}" ><i class="fa fa-fw fa-power-off"></i> Log Out</h:outputLink>
-                        </li>
-                      </ul>
-
-                    </li>
-
-                  </ul>
-
+                    </ul>
                   </h:form>
                 </div>
+                
                 <!--/.nav-collapse -->
 
 
@@ -347,54 +120,19 @@
 
         </header>
 
-        <!-- *** LOGIN MODAL ***
-_________________________________________________________ -->
-
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="Login">Customer login</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="customer-orders.html" method="post">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="email_modal" placeholder="email"/>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" id="password_modal" placeholder="password"/>
-                            </div>
-
-                            <p class="text-center">
-                                <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Log in</button>
-                            </p>
-
-                        </form>
-
-                        <p class="text-center text-muted">Not registered yet?</p>
-                        <p class="text-center text-muted"><a href="customer-register.html"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- *** LOGIN MODAL END *** -->
 
         <div id="heading-breadcrumbs">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                        <h2>Hesabım</h2>
                     </div>
                     <div class="col-md-5">
-                        <ul class="breadcrumb">
+                        <ul class="breadcrumb" style="padding-right: 180px;" >
 
-                            <li><a href="index_1.html">Home</a>
+                            <li><a href="index.xhtml">Anasayfa</a>
                             </li>
-                            <li>Hesabım</li>
+                            <li>#{userBean.login_user.name}</li>
                         </ul>
                     </div>
                 </div>
@@ -410,7 +148,7 @@ _________________________________________________________ -->
                     <!-- *** LEFT COLUMN ***
 			 _________________________________________________________ -->
 
-                    <div class="col-md-9 clearfix" id="customer-account" style='background: white;'>
+                    <div class="col-md-9 clearfix" id="customer-account" style='background: white; padding-bottom: 20px;'>
                       
                       <p class="lead" style="margin-top: 40px;">Kişisel bilgilerini ve şifreni buradan değiştir.</p>
 
@@ -453,7 +191,7 @@ _________________________________________________________ -->
                         </div>
                         <!-- /.box -->
                           
-                        <div class="box clearfix">
+                        <div class=" clearfix">
                           
                             <div class="heading">
                                 <h3 class="text-uppercase">Personal details</h3>
@@ -508,28 +246,25 @@ _________________________________________________________ -->
                     <!-- *** RIGHT COLUMN ***
 			 _________________________________________________________ -->
 
-                    <div class="col-md-3">
+                    <div class="col-md-3" >
                         <!-- *** CUSTOMER MENU ***
  _________________________________________________________ -->
-                        <div class="panel panel-default sidebar-menu">
+                        <div class="panel panel-default sidebar-menu" style="padding: 10px;">
 
                             <div class="panel-heading">
-                                <h3 class="panel-title">Customer section</h3>
+                                <h3 class="panel-title">Notlarım</h3>
                             </div>
 
                             <div class="panel-body">
 
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active">
-                                      <h3> Notlarım</h3>
-                                    </li>
-                                  <br/>
-                                  <br/>
-                                  <br/>
-                                  <br/>
+                                  <ui:repeat var="udoc" value="#{documentBean.userDocs(userBean.login_user.userId)}">
                                     <li>
-                                        <a href="index_1.html"><i class="fa fa-sign-out"></i> Logout</a>
-                                    </li>
+                                      <a href="#"> #{udoc.documentLink.substring(30)}</a>
+                                    </li> 
+                                  </ui:repeat>
+                                  
+                                  
                                 </ul>
                             </div>
 
@@ -538,7 +273,15 @@ _________________________________________________________ -->
 
                         <!-- *** CUSTOMER MENU END *** -->
                     </div>
-
+                    <div class="col-md-3" >
+                        <!-- *** CUSTOMER MENU ***
+ _________________________________________________________ -->
+                        <h:form>
+                        <div class="panel panel-default sidebar-menu" >
+                          <p:commandButton class="nav nav-pills nav-stacked btn-lg"  action="#{userBean.logout()}" value="Çıkış"  style="width: 100%; text-align: left; border: none; background: #ff4444; color: white;" > </p:commandButton>
+                        </div>
+                          </h:form>
+                    </div>
                     <!-- *** RIGHT COLUMN END *** -->
 
                 </div>
@@ -572,143 +315,61 @@ _________________________________________________________ -->
 _________________________________________________________ -->
 
         <footer id="footer">
-            <div class="container">
-                <div class="col-md-3 col-sm-6">
-                    <h4>About us</h4>
+          <div class="container">
+            <div class="col-md-3 col-sm-6">
+              <h4>Hakkımızda</h4>
 
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-                    <hr/>
-
-                    <h4>Join our monthly newsletter</h4>
-
-                    <form>
-                        <div class="input-group">
-
-                            <input type="text" class="form-control"></input>
-
-                            <span class="input-group-btn">
-
-                        <button class="btn btn-default" type="button"><i class="fa fa-send"></i></button>
-
-                    </span>
-
-                        </div>
-                        <!-- /input-group -->
-                    </form>
-
-                    <hr class="hidden-md hidden-lg hidden-sm"/>
-
-                </div>
-                <!-- /.col-md-3 -->
-
-                <div class="col-md-3 col-sm-6">
-
-                    <h4>Blog</h4>
-
-                    <div class="blog-entries">
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
-
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
-
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Very very long blog post name</a></h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="hidden-md hidden-lg"/>
-
-                </div>
-                <!-- /.col-md-3 -->
-
-                <div class="col-md-3 col-sm-6">
-
-                    <h4>Contact</h4>
-
-                    <p><strong>Universal Ltd.</strong>
-                        <br/>13/25 New Avenue
-                        <br/>Newtown upon River
-                        <br/>45Y 73J
-                        <br/>England
-                        <br/>
-                        <strong>Great Britain</strong>
-                    </p>
-
-                    <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
-
-                    <hr class="hidden-md hidden-lg hidden-sm"/>
-
-                </div>
-                <!-- /.col-md-3 -->
+              <p>Araştırmayı ve üretmeyi seven meraklı öğrencileriz.</p>
 
 
 
-                <div class="col-md-3 col-sm-6">
 
-                    <h4>Photostream</h4>
+              <hr class="hidden-md hidden-lg hidden-sm"/>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <div class="col-md-3 col-sm-6">
+
+
+              <hr class="hidden-md hidden-lg"/>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <div class="col-md-3 col-sm-6">
+
+              <h4>Iletişim</h4>
+
+              <p>
+                              Süleyman Demirel Üniversitesi <br/>
+                              Çünür Mahallesi <br/>
+                              Süleyman Demirel Caddesi<br/>
+                              Çünür/Isparta<br/>
+                              <strong>Türkiye</strong>
+                            </p>
+
+              <a href="contact.xhtml" class="btn btn-small btn-template-main">İletişim Sayfasına Git</a>
+              <hr class="hidden-md hidden-lg hidden-sm"/>
+              
+              
+            </div>
+            <div class="col-md-3 col-sm-6">
+
+                    
 
                     <div class="photostream">
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare3.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare2.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
-                        <div>
-                            <a href="#">
-                                <img src="img/detailsquare.jpg" class="img-responsive" alt="#"/>
-                            </a>
-                        </div>
+                      <h5>  İlk işimiz ulusu çalışkan yapmaktır.</h5>
                     </div>
-
+              <strong style="color:white;"><p>Mustafa Kemal Atatürk</p></strong>
                 </div>
-                <!-- /.col-md-3 -->
-            </div>
-            <!-- /.container -->
+            <!-- /.col-md-3 -->
+            
+
+
+            <!-- /.col-md-3 -->
+          </div>
+          <!-- /.container -->
         </footer>
         <!-- /#footer -->
 
@@ -739,7 +400,18 @@ _________________________________________________________ -->
 
 
     <!-- #### JAVASCRIPT FILES ### -->
+       <f:verbatim>
+        <script>
+          window.jQuery || document.write('<h:outputScript library="js" name="jquery-1.11.0.min.js"/>');
+          $('.sinif').click(function () {
+            $(this).toggleClass('active');
 
+          });
+          $('.no-collapsable').on('click', function (e) {
+            e.stopPropagation();
+          });
+        </script>
+      </f:verbatim>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

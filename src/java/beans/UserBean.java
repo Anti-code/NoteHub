@@ -46,6 +46,9 @@ public class UserBean implements Serializable {
   }
 
   public List<Users> getUser_list() {
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
     hibernate_session.beginTransaction();
     user_list = (List<Users>) hibernate_session.createQuery("from Users").list();
     hibernate_session.getTransaction().commit();
@@ -53,6 +56,9 @@ public class UserBean implements Serializable {
   }
   
   public String deleteSelectedUsers(){
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
      hibernate_session.beginTransaction();
       for(Users d: selected_users){
         hibernate_session.delete(d);
@@ -71,8 +77,9 @@ public class UserBean implements Serializable {
      }
   public String register() {
     try {
-      hibernate_session = hibernate_util.getSessionFactory().openSession();
-
+      if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
       hibernate_session.beginTransaction();
       new_user.setAuthority("User");
       new_user.setRegisterDate(new Date(timestamp.getTime()));
@@ -89,6 +96,9 @@ public class UserBean implements Serializable {
   public List<Users> dailyUsers() {
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DATE, -1);
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
     hibernate_session.beginTransaction();
     Query q = hibernate_session.createQuery("from Users as u where u.registerDate > :today");
 
@@ -100,6 +110,9 @@ public class UserBean implements Serializable {
   public List<Users> monthlyUsers() {
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DATE, -1);
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
     hibernate_session.beginTransaction();
     Query q = hibernate_session.createQuery("from Users as u where u.registerDate > :today");
 
@@ -112,20 +125,30 @@ public class UserBean implements Serializable {
     return "customer-account.xhtml  ";
   }
   public void updateUser(){
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
     hibernate_session.beginTransaction();
     hibernate_session.update(login_user);
     hibernate_session.getTransaction().commit();
     System.out.println("update succesfull");
   }
   public void delete(Users u){
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
      hibernate_session.beginTransaction();
     hibernate_session.delete(u);
     hibernate_session.getTransaction().commit();
     System.out.println("update succesfull");
   }
   public void updatePassword(){
+    
     if((password_old == null ? login_user.getPassword() == null : password_old.equals(login_user.getPassword())) && (password_new == null ? password_verify == null : password_new.equals(password_verify)) && (password_new == null ? password_old != null : !password_new.equals(password_old)) ){
     login_user.setPassword(password_new);
+    if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
       hibernate_session.beginTransaction();
     hibernate_session.update(login_user);
     hibernate_session.getTransaction().commit();
@@ -134,14 +157,14 @@ public class UserBean implements Serializable {
   }
   public String login() {
     try {
-
-      hibernate_session = hibernate_util.getSessionFactory().openSession();
+      if(hibernate_session.getTransaction().isActive()){
+        hibernate_session.getTransaction().commit();
+      }
       hibernate_session.beginTransaction();
       
       Query q = hibernate_session.createQuery("from Users as u where u.EMail =:EMail");
       q.setString("EMail", email);
       hibernate_session.getTransaction().commit();
-       hibernate_session = hibernate_util.getSessionFactory().openSession();
       hibernate_session.beginTransaction();
       
       setLogin_user((Users) q.list().get(0));

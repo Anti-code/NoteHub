@@ -45,22 +45,20 @@
           <!-- *** NAVBAR ***
   _________________________________________________________ -->
 
-          <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+            <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
 
             <div class="navbar navbar-default yamm" style="background-color: #fff; border-color:#fff; margin-bottom: 5px; padding-bottom: 2px;" role="navigation" id="navbar">
 
               <div class="container">
-
-
+               
+                
                 <!--/.navbar-header -->
 
                 <div class="navbar-collapse collapse" id="navigation">
                   <h:form enctype="multipart/form-data">
-                    <ul class="nav navbar-nav navbar-left">
-                      <li ><h:commandLink  action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
-                        NoteHub</h2></h:commandLink>
-                        </li>
-</ul>
+                   <a  class="nav navbar-nav navbar-left" href="index.xhtml"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
+                           NoteHub</h2></a>
+                    
                     <ul class="nav navbar-nav navbar-right">
 
                       <li class="btn-default" >
@@ -69,231 +67,28 @@
 
                       </li>
 
-                      <!-- ========== FULL WIDTH MEGAMENU ================== -->
-                      <li class="dropdown use-yamm yamm-fw">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
-                        <ul class="dropdown-menu" >
-                          <li>
-
-                            <div class="yamm-content">
-                              <div class="row">
-                                <div class="col-sm-3">
-                                  <h5>1.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec1" value="#{lectureBean.lecture_list1}">
-                                      <li><h:commandLink value="#{lec1.name}" action="#{documentBean.documentByLecture(lec1.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-
-
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>2.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec2" value="#{lectureBean.lecture_list2}">
-                                      <li><h:commandLink value="#{lec2.name}" action="#{documentBean.documentByLecture(lec2.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>3.Sınıf</h5>
-
-                                  <ul>
-                                    <ui:repeat var="lec3" value="#{lectureBean.lecture_list3}">
-                                      <li><h:commandLink value="#{lec3.name}" action="#{documentBean.documentByLecture(lec3.lectureId)}" >
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-                                </div>
-                                <div class="col-sm-3">
-                                  <h5>4.Sınıf</h5>
-                                  <ul>
-                                    <ui:repeat var="lec4" value="#{lectureBean.lecture_list4}">
-                                      <li><h:commandLink value="#{lec4.name}" action="#{documentBean.documentByLecture(lec4.lectureId)}" >
-
-
-                                        </h:commandLink>
-                                      </li>
-                                    </ui:repeat>
-                                  </ul>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /.yamm-content -->
-                          </li>
-                        </ul>
-                      </li>
-                      <!-- ========== FULL WIDTH MEGAMENU END ================== -->
-
-                      <li class="dropdown "  >
-                        <a id="root"  class="dropdown-toggle" data-toggle="dropdown" data-target="#root" >Katkıda Bulun<b class="caret"></b></a>
-                        <ul class="dropdown-menu file-width"  >
-                          <li>
-                            <div class="yamm-content">
-                              <div class="row">
-
-                                <div class="col-md-12">
-                                  <h5><strong>Döküman Ekleme</strong></h5>
-                                 
-                                      <div class="file-container">
-                                        <div class="panel panel-default">
-                                          <div class="panel-body">
-
-                                            <!-- Standar Form -->
-
-                                            <h:form id="document_form" enctype="multipart/form-data">
-
-                                              <div class = "form-group">
-                                                <label for = "name">Başlık</label>
-                                                <h:inputTextarea  class = "form-control no-collapsable" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
-                                                <br/>
-                                                <p:growl id="messages" showDetail="true" />
-                                                <label for = "name">Ders</label>
-                                                <h:selectOneMenu class="form-control no-collapsable" value="#{documentBean.secilen}">
-                                                  <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
-                                                </h:selectOneMenu>
-
-
-                                                <br/>
-
-
-
-                                                <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
-                                                  <p:fileUpload class="form-control no-collapsable" mode="simple" process="@form" update="document_form" fileUploadListener="#{documentBean.fileSelected(event)}" value="#{documentBean.document_file}">
-
-                                                  </p:fileUpload>
-                                                </span>
-
-                                              </div>
-
-                                              <h:panelGroup id="outputMessage" class="no-collapsable" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
-                                                <div class="js-upload-finished">
-
-                                                  <div class="list-group">
-                                                    <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
-                                                  </div>
-                                                </div>
-                                              </h:panelGroup>
-
-                                              <p:commandButton value="Bitir" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
-                                              </p:commandButton>
-                                            </h:form>
-                                          </div>
-                                        </div>
-                                      </div> <!-- /container -->
-                                    
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
+                      
+                      
 
 
 
 
+                     
+                      <li class="btn-default" >
 
-                      <li class="dropdown">
-
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><h:outputText value="#{userBean.login_user.name}" /><b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li>
-                            <a href="#{userBean.profile()}"><i class="fa fa-fw fa-user"></i> Profile</a>
-                          </li>
-                          <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                          </li>
-
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope">Mesajlar</i> <b class="caret"></b></a>
-                            <ul class="dropdown-menu message-dropdown">
-                              <li class="message-preview">
-                                <a href="#">
-                                  <div class="media">
-                                    <span class="pull-left">
-                                      <img class="media-object" src="http://placehold.it/50x50" alt=""/>
-                                    </span>
-                                    <div class="media-body">
-                                      <h5 class="media-heading"><strong>John Smith</strong>
-                                      </h5>
-                                      <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                      <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li class="message-footer">
-                                <a href="#">Read All New Messages</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li class="dropdown-toggle">
-                            <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell">Bildirimler</i> <b class="caret"></b></a>
-                            <ul class="dropdown-menu alert-dropdown">
-                              <li>
-                                <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                              </li>
-                              <li>
-                                <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                              </li>
-                              <li>
-                                <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                              </li>
-                              <li>
-                                <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                              </li>
-                              <li>
-                                <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                              </li>
-                              <li>
-                                <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                              </li>
-                              <li class="divider"></li>
-                              <li>
-                                <a href="#">View All</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                            <h:outputLink value="#{userBean.logout()}" ><i class="fa fa-fw fa-power-off"></i> Log Out</h:outputLink>
-                          </li>
-                        </ul>
+                        <h:commandLink action="#{userBean.profile()}" class="btn-default" >#{userBean.login_user.name}</h:commandLink>
 
                       </li>
+                      
 
                     </ul>
-
                   </h:form>
                 </div>
+                
                 <!--/.nav-collapse -->
 
 
 
-                <div class="collapse clearfix" id="search">
-
-                  <h:form class="navbar-form" role="search">
-                    <div class="input-group">
-                      <h:inputText value="#{noteBean.search()}" />
-                      <span class="input-group-btn">
-                        <h:commandButton value="#{noteBean.search()}" styleClass="btn btn-template-main"></h:commandButton>
-                      </span>
-                    </div>
-                  </h:form>
-
-                </div>
                 <!--/.nav-collapse -->
 
               </div>
@@ -303,6 +98,7 @@
             <!-- /#navbar -->
 
           </div>
+
 
           <!-- *** NAVBAR END *** -->
 
@@ -314,21 +110,24 @@
         <div id="heading-breadcrumbs">
             <div class="container">
                 <div class="row">
-                        <div class="col-md-12">
-                            <div class="heading">
-                                <h2>NoteHub'dan Kimler Sorumlu?</h2>
-                            </div>
-
-                            
-                        </div>
+                    <div class="col-md-7">
                     </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb" style="padding-right: 180px;" >
+
+                            <li><a href="index.xhtml">Anasayfa</a>
+                            </li>
+                            <li>İletişim</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="content" class="clearfix" >
+        <div id="content" class="clearfix" style="background: #e9ecf2; padding-top: 30px;" >
 <div class="container" id="contact">
                   
-                <div class="row">
+                <div class="row" style="background: white; margin-bottom: 40px;">
                   
                     <div class="col-md-8">
                       <section>
@@ -463,7 +262,7 @@
 
                             <h3 class="text-uppercase">Online Destek</h3>
 
-                            <p class="text-muted">Lütfen bize email atın veya bizi arayın.</p>
+                            <p class="text-muted">Bize mail atın veya arayın.</p>
                             <ul>
                                 <li><strong><a href="mailto:">notehubenterprise@gmail.com</a></strong>
                                 </li>
@@ -506,118 +305,63 @@ _________________________________________________________ -->
         <!-- *** FOOTER ***
 _________________________________________________________ -->
 
+        
         <footer id="footer">
-            <div class="container">
-                <div class="col-md-3 col-sm-6">
-                    <h4>About us</h4>
+          <div class="container">
+            <div class="col-md-3 col-sm-6">
+              <h4>Hakkımızda</h4>
 
-                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-
-                    <hr/>
-
-                    <h4>Join our monthly newsletter</h4>
-
-                    <form>
-                        <div class="input-group">
-
-                            <input type="text" class="form-control"></input>
-
-                            <span class="input-group-btn">
-
-                        <button class="btn btn-default" type="button"><i class="fa fa-send"></i></button>
-
-                    </span>
-
-                        </div>
-                        <!-- /input-group -->
-                    </form>
-
-                    <hr class="hidden-md hidden-lg hidden-sm"/>
-
-                </div>
-                <!-- /.col-md-3 -->
-
-                <div class="col-md-3 col-sm-6">
-
-                    <h4>Blog</h4>
-
-                    <div class="blog-entries">
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
-
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Blog post name</a></h5>
-                            </div>
-                        </div>
-
-                        <div class="item same-height-row clearfix">
-                            <div class="image same-height-always">
-                                <a href="#">
-                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
-                                </a>
-                            </div>
-                            <div class="name same-height-always">
-                                <h5><a href="#">Very very long blog post name</a></h5>
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr class="hidden-md hidden-lg"/>
-
-                </div>
-                <!-- /.col-md-3 -->
-
-                <div class="col-md-3 col-sm-6">
-
-                    <h4>Contact</h4>
-
-                    <p><strong>Universal Ltd.</strong>
-                      Süleyman Demirel Üniversitesi, Çünür Mahallesi, Süleyman Demirel Caddesi, 32260 Çünür/Isparta
-                        <br/>13/25 New Avenue
-                        <br/>Newtown upon River
-                        <br/>45Y 73J
-                        <br/>England
-                        <br/>
-                        <strong>Great Britain</strong>
-                    </p>
-
-                    <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
-
-                    <hr class="hidden-md hidden-lg hidden-sm"/>
-
-                </div>
-                <!-- /.col-md-3 -->
+              <p>Araştırmayı ve üretmeyi seven meraklı öğrencileriz.</p>
 
 
 
-                <div class="col-md-3 col-sm-6">
+
+              <hr class="hidden-md hidden-lg hidden-sm"/>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <div class="col-md-3 col-sm-6">
+
+
+              <hr class="hidden-md hidden-lg"/>
+
+            </div>
+            <!-- /.col-md-3 -->
+
+            <div class="col-md-3 col-sm-6">
+
+              <h4>Iletişim</h4>
+
+              <p>
+                              Süleyman Demirel Üniversitesi <br/>
+                              Çünür Mahallesi <br/>
+                              Süleyman Demirel Caddesi<br/>
+                              Çünür/Isparta<br/>
+                              <strong>Türkiye</strong>
+                            </p>
+
+
+              <hr class="hidden-md hidden-lg hidden-sm"/>
+              
+              
+            </div>
+            <div class="col-md-3 col-sm-6">
 
                     
 
                     <div class="photostream">
-                      <h5> Hiçbir şeye ihtiyacımız yok, yalnız bir şeye ihtiyacımız vardır: çalışkan olmak</h5>
+                      <h5>  Hiçbir şeye ihtiyacımız yok, yalnız bir şeye ihtiyacımız vardır: çalışkan olmak.</h5>
                     </div>
-                      <h4>Mustafa Kemal Atatürk</h4>
+              <strong style="color:white;"><p>Mustafa Kemal Atatürk</p></strong>
                 </div>
-                <!-- /.col-md-3 -->
-                
-            </div>
-          
-            <!-- /.container -->
+            <!-- /.col-md-3 -->
+            
+
+
+            <!-- /.col-md-3 -->
+          </div>
+          <!-- /.container -->
         </footer>
         <!-- /#footer -->
 

@@ -79,6 +79,9 @@ public class DocumentBean implements Serializable{
         
   }
   public String loadLatest(){
+    if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
     session.beginTransaction();
     Query q=session.createQuery("from Document as d  ORDER BY d.postDate DESC");
     q.setMaxResults(10);
@@ -118,6 +121,9 @@ public class DocumentBean implements Serializable{
     }
     
     public void loadMore(){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
         doc_index+=3;
         session.beginTransaction();
         Query q = session.createQuery("from Document as d ORDER BY d.postDate DESC");
@@ -168,6 +174,9 @@ public class DocumentBean implements Serializable{
     }
     
     public List<Document> documentByYear(Integer year){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
       
         session.beginTransaction();
         Query q = session.createQuery("from Document as d where d.lectures.year=:year ORDER BY d.postDate DESC");
@@ -176,6 +185,9 @@ public class DocumentBean implements Serializable{
        return (List<Document>) q.list();
     }
     public String[] montlyDocumentVariance(Integer day){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
       String[] values = null;
       Integer temp;
       session.beginTransaction();
@@ -192,6 +204,9 @@ public class DocumentBean implements Serializable{
     }
     
     public Integer weekly(Integer year, Integer day){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
       session.beginTransaction();
       Calendar c = Calendar.getInstance();
       c.add(Calendar.DATE, -7);
@@ -266,9 +281,23 @@ public class DocumentBean implements Serializable{
       }
     
     public List<Document> userDocs(Integer uid){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
       session.beginTransaction();
-      Query q = session.createQuery("from Document as d where d.users.userId:userid");
+      Query q = session.createQuery("from Document as d where d.users.userId=:userid");
       q.setInteger("userid", uid);
+      session.getTransaction().commit();
+      return (List<Document>)q.list();
+    }
+    public List<Document> userDocsFive(Integer uid){
+      if(session.getTransaction().isActive()){
+        session.getTransaction().commit();
+      }
+      session.beginTransaction();
+      Query q = session.createQuery("from Document as d where d.users.userId=:userid order by d.postDate desc");
+      q.setInteger("userid", uid);
+      q.setMaxResults(6);
       session.getTransaction().commit();
       return (List<Document>)q.list();
     }

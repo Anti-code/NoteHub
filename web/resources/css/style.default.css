@@ -1733,7 +1733,10 @@ fieldset[disabled] .btn-template-primary.active {
   border: none;
 }
 #heading-breadcrumbs {
-  background: url('../resources/img/texture-bw.png') center center repeat;
+  background: url('../resources/img/cover.jpg');
+  min-width: 100%;
+    height: 150px;
+  
   padding: 20px 0;
   
 }
