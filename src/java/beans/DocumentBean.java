@@ -264,13 +264,13 @@ public class DocumentBean implements Serializable{
         session.getTransaction().commit();
 
       }
-    public String deleteSelectedDocuments(){
+    
+    public List<Document> userDocs(Integer uid){
       session.beginTransaction();
-      for(Document d: selected_documents){
-        session.delete(d);
-      }
+      Query q = session.createQuery("from Document as d where d.users.userId:userid");
+      q.setInteger("userid", uid);
       session.getTransaction().commit();
-      return "charts.xhtml?faces-redirect=true";
+      return (List<Document>)q.list();
     }
    
 

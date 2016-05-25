@@ -32,6 +32,7 @@ public class UserBean implements Serializable {
   private String password_new, password_old;
   private java.util.Date timestamp = new java.util.Date();
   private Boolean isLoggedIn = true;
+  private String[][] user_activity;
 
   @EJB
   private CounterBean counterBean;
@@ -116,6 +117,12 @@ public class UserBean implements Serializable {
     hibernate_session.getTransaction().commit();
     System.out.println("update succesfull");
   }
+  public void delete(Users u){
+     hibernate_session.beginTransaction();
+    hibernate_session.delete(u);
+    hibernate_session.getTransaction().commit();
+    System.out.println("update succesfull");
+  }
   public void updatePassword(){
     if((password_old == null ? login_user.getPassword() == null : password_old.equals(login_user.getPassword())) && (password_new == null ? password_verify == null : password_new.equals(password_verify)) && (password_new == null ? password_old != null : !password_new.equals(password_old)) ){
     login_user.setPassword(password_new);
@@ -130,9 +137,13 @@ public class UserBean implements Serializable {
 
       hibernate_session = hibernate_util.getSessionFactory().openSession();
       hibernate_session.beginTransaction();
+      
       Query q = hibernate_session.createQuery("from Users as u where u.EMail =:EMail");
       q.setString("EMail", email);
       hibernate_session.getTransaction().commit();
+       hibernate_session = hibernate_util.getSessionFactory().openSession();
+      hibernate_session.beginTransaction();
+      
       setLogin_user((Users) q.list().get(0));
       if (login_user.getPassword().equals(password_verify)) {
         isLoggedIn = true;
@@ -237,5 +248,21 @@ public String adminLogout() {
 
   public void setSelected_users(List<Users> selected_users) {
     this.selected_users = selected_users;
+  }
+
+  @SuppressWarnings("empty-statement")
+  public String[][] getUser_activity() {
+    
+    for(Users u: user_list){
+      String[][] user_activity={
+      {u.getName(), "12", String.valueOf(u.getDocuments().size()), "1"}
+    };
+    }
+    
+    return user_activity;
+  }
+
+  public void setUser_activity(String[][] user_activity) {
+    this.user_activity = user_activity;
   }
 }

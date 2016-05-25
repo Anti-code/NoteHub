@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 16, 2016 10:12:23 AM by Hibernate Tools 4.3.1
+// Generated May 25, 2016 12:15:23 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Users  implements java.io.Serializable {
      private Integer resourceId;
      private Date registerDate;
      private Set documents = new HashSet(0);
+     private Set logs = new HashSet(0);
 
     public Users() {
     }
@@ -34,7 +35,7 @@ public class Users  implements java.io.Serializable {
         this.EMail = EMail;
         this.registerDate = registerDate;
     }
-    public Users(String authority, String password, String name, String surname, String EMail, Integer resourceId, Date registerDate, Set documents) {
+    public Users(String authority, String password, String name, String surname, String EMail, Integer resourceId, Date registerDate, Set documents, Set logs) {
        this.authority = authority;
        this.password = password;
        this.name = name;
@@ -43,6 +44,7 @@ public class Users  implements java.io.Serializable {
        this.resourceId = resourceId;
        this.registerDate = registerDate;
        this.documents = documents;
+       this.logs = logs;
     }
    
     public Integer getUserId() {
@@ -107,6 +109,13 @@ public class Users  implements java.io.Serializable {
     
     public void setDocuments(Set documents) {
         this.documents = documents;
+    }
+    public Set getLogs() {
+        return this.logs;
+    }
+    
+    public void setLogs(Set logs) {
+        this.logs = logs;
     }
 
 

@@ -98,71 +98,55 @@
                       </p:cellEditor>
                     </p:column>
 
-                    <p:column headerText="Ders" width="150" class="table table-striped">
+                    <p:column headerText="Yetki" width="100" class="table table-striped">
                       <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{user.authority}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{user.authority}"/></f:facet>
                       </p:cellEditor>
                     </p:column>       
 
-                    <p:column headerText="Başlık" width="200" class="table table-striped">
+                    <p:column headerText="Şifre" width="170" class="table table-striped">
                       <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{user.password}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{user.password}"/></f:facet>
                       </p:cellEditor>
                     </p:column> 
 
-                    <p:column headerText="Link" width="250" class="table table-striped">
+                    <p:column headerText="İsim" width="110" class="table table-striped">
                       <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{user.name}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{user.name}"/></f:facet>
                       </p:cellEditor>
                     </p:column> 
-                    <p:column headerText="Link" width="250" class="table table-striped">
+                    <p:column headerText="Soyisim" width="120" class="table table-striped">
                       <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{user.surname}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{user.surname}"/></f:facet>
                       </p:cellEditor>
                     </p:column> 
-                    <p:column headerText="Link" width="250" class="table table-striped">
+                    <p:column headerText="Email" width="200" class="table table-striped">
                       <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{user.EMail}"/></f:facet>
                         <f:facet name="input"><h:inputText value="#{user.EMail}"/></f:facet>
                       </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Link" width="250" class="table table-striped">
-                      <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{user.documents.size()}"/></f:facet>
-                        <f:facet name="input"><h:inputText value="#{user.documents.size()}"/></f:facet>
-                      </p:cellEditor>
-                    </p:column> 
-                    <p:column headerText="Link" width="250" class="table table-striped">
-                      <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{user.registerDate}"/></f:facet>
-                        <f:facet name="input"><h:inputText value="#{user.registerDate}"/></f:facet>
-                      </p:cellEditor>
-                    </p:column> 
-                    <p:column headerText="Tarih" width="70" class="table table-striped">
-                      <h:outputText  value="#{doc.postDate}"/>
+                    
+                     
+                    <p:column headerText="Kayıt tarihi" width="100" class="table table-striped">
+                      <h:outputText  value="#{user.registerDate}"/>
                     </p:column> 
                     <p:column style="width:32px">
                       <p:rowEditor />
                     </p:column>
-                    <p:column style="width: 32px;">
-                      <p:commandButton icon="ui-icon-trash" style="border:none;" update="@form" action="#{documentBean.delete(doc)}"></p:commandButton>
+                    <p:column style="width: 50px;">
+                      <p:commandButton icon="ui-icon-trash" style="border:none;" update="@form" action="#{userBean.delete(user)}"></p:commandButton>
                     </p:column>
                       
                   </p:dataTable> 
                 </div>
 
 
-                <div class="box-footer">
-                  <div class="pull-left">
-                    <p:commandButton class="btn btn-sm btn-sm btn-info active" value="Sil" action="#{documentBean.deleteSelectedDocuments()}"></p:commandButton>
-                    <p:commandButton type="submit" class="btn btn-sm btn-template-main btn-info active" value="Düzenle">
-                    </p:commandButton>
-                  </div>
-                </div>
+                
               </h:form>
 
             </div>
@@ -170,21 +154,10 @@
         </div>
         <hr/>
         
-        <div class='panel'>
-          <div class="panel-heading">Haftalık eklenen dökümanlar</div>
-          <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
-        </div>
+        
         <div class="panel">
-          <div class="panel-heading">Sınıflara Göre Dağılım</div>
-          <div class="panel-body panel-info pa">
-            <div id="documentpiechart" ></div>
-              
-          </div>
-            
-        </div>
-        <div class="panel">
-          <div class="panel-heading">Genel Varyans</div>
-          <div id="line_top_x"></div>
+          <div class="panel-heading">Genel Katkı Dağılımı</div>
+          <div id="series_chart_div" style="width: 900px; height: 500px;"></div>
         </div>
         
         <hr/>
@@ -202,81 +175,25 @@
       <script src="resources/js/easypiechart-data.js"></script>
       <script src="resources/js/bootstrap-datepicker.js"></script>
       <f:verbatim><script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart', 'bar', 'line']});
+        google.charts.load('current', {'packages': ['corechart', 'bar', 'line', 'corechart']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
 
-          var data_pie = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['1.Sınıf', #{documentBean.documentByYear(1).size()}],
-            ['2.Sınıf', #{documentBean.documentByYear(2).size()}],
-            ['3.Sınıf', #{documentBean.documentByYear(3).size()}],
-            ['4.Sınıf', #{documentBean.documentByYear(4).size()}]
-          ]);
-          
-
-          var options_pie = {
-            'legend': 'left',
-            'title': '',
-            'height': 400
-          };
-
-          var chart_pie = new google.visualization.PieChart(document.getElementById('documentpiechart'));
-
-          chart_pie.draw(data_pie, options_pie);
-          
-        var data_bar = google.visualization.arrayToDataTable([
-          ['Günler', '1.sınıf', '2.sınıf', '3.sınıf', '4.sınıf'],
-          ['Pazartesi', #{documentBean.weekly(1, 2)}, #{documentBean.weekly(2, 2)}, #{documentBean.weekly(3, 2)},#{documentBean.weekly(4, 2)}],
-          ['Salı',#{documentBean.weekly(1, 3)}, #{documentBean.weekly(2, 3)}, #{documentBean.weekly(3, 3)},#{documentBean.weekly(4, 3)}],
-          ['Çarşamba', #{documentBean.weekly(1, 4)}, #{documentBean.weekly(2, 4)}, #{documentBean.weekly(3, 4)},#{documentBean.weekly(4, 4)}],
-          ['Perşembe', #{documentBean.weekly(1, 5)}, #{documentBean.weekly(2, 5)}, #{documentBean.weekly(3, 5)},#{documentBean.weekly(4, 5)}],
-          ['Cuma', #{documentBean.weekly(1, 6)}, #{documentBean.weekly(2, 6)}, #{documentBean.weekly(3, 6)},#{documentBean.weekly(4, 6)}],
-          ['Cumartesi', #{documentBean.weekly(1, 7)}, #{documentBean.weekly(2, 7)}, #{documentBean.weekly(3, 7)},#{documentBean.weekly(4, 7)}],
-          ['Pazar', #{documentBean.weekly(1, 1)}, #{documentBean.weekly(2, 1)}, #{documentBean.weekly(3, 1)},#{documentBean.weekly(4, 1)}]
-        ]);
-          var options_bar = {
-            'legend': 'left',
-            'title': '',
-            'height': 400
-          };
-          
-          var chart_bar = new google.charts.Bar(document.getElementById('columnchart_material'));
-        chart_bar.draw(data_bar, options_bar);
+    var bubble_data = google.visualization.arrayToDataTable([
+        ['ID',     'Aktiflik', 'Katkı',  "Yogunluk" ,"more","data"],
         
-        
-        var data_line = new google.visualization.DataTable();
-      data_line.addColumn('number', 'Aylar');
-      data_line.addColumn('number', 'Döküman Sayısı');
-
-      data_line.addRows([
-        [1,  11.8],
-        [2,  14.4],
-        [3,  15.7],
-        [4,  16.7],
-        [5,  17.9],
-        [6,  19.9],
-        [7,   18.8],
-        [8,  16.7],
-        [9,  17.9],
-        [10,  19.9],
-        [11,   20.8],
-        [12,  19.9]
+        ['CAN',    10,           3,      2,           2,       1],
+        ['DEU',    20,           8,      1,           2,        1]
       ]);
 
-      var options_line = {
-        width: 900,
-        height: 500,
-        axes: {
-          x: {
-            0: {side: 'top'}
-          }
-        }
+      var bubble_options = {
+        hAxis: {title: 'Aktiflik'},
+        vAxis: {title: 'Katkı'},  
+        bubble: {textStyle: {fontSize: 11}}
       };
 
-      var chart_line = new google.charts.Line(document.getElementById('line_top_x'));
-
-      chart_line.draw(data_line, options_line);
+      var bubble_chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      bubble_chart.draw(bubble_data, bubble_options);
         }
                 </script></f:verbatim>
      

@@ -930,11 +930,13 @@ fieldset[disabled] .btn-template-primary.active {
   background: yellow;
 }
 .panel.sidebar-menu .panel-body label {
-  color: #999999;
+  color: #555;
   font-size: 12px;
+  font-weight: 200;
+  padding-left: 5px;
 }
 .panel.sidebar-menu .panel-body label:hover {
-  color: #555555;
+  color: #222;
 }
 .panel.sidebar-menu ul.nav.category-menu {
   margin-bottom: 20px;
@@ -1733,7 +1735,7 @@ fieldset[disabled] .btn-template-primary.active {
 #heading-breadcrumbs {
   background: url('../resources/img/texture-bw.png') center center repeat;
   padding: 20px 0;
-  margin-bottom: 40px;
+  
 }
 #heading-breadcrumbs.no-mb {
   margin-bottom: 0;

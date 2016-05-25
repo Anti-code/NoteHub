@@ -58,9 +58,11 @@
 
                 <div class="navbar-collapse collapse" id="navigation">
                   <h:form enctype="multipart/form-data">
-                    <h:commandLink class="nav navbar-nav navbar-left" action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
+                    <ul class="nav navbar-nav navbar-left">
+                      <li ><h:commandLink  action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; text-transform: none; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
                         NoteHub</h2></h:commandLink>
-
+                        </li>
+</ul>
                     <ul class="nav navbar-nav navbar-right">
 
                       <li class="btn-default" >
@@ -72,7 +74,7 @@
                       <!-- ========== FULL WIDTH MEGAMENU ================== -->
                       <li class="dropdown use-yamm yamm-fw">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" >
                           <li>
 
                             <div class="yamm-content">
@@ -134,7 +136,7 @@
                       </li>
                       <!-- ========== FULL WIDTH MEGAMENU END ================== -->
 
-                      <li class="dropdown ">
+                      <li class="dropdown "  >
                         <a id="root"  class="dropdown-toggle" data-toggle="dropdown" data-target="#root" >Katkıda Bulun<b class="caret"></b></a>
                         <ul class="dropdown-menu file-width"  >
                           <li>
@@ -170,7 +172,7 @@
                                                 <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
                                                   <p:fileUpload class="form-control no-collapsable" mode="simple" process="@form" update="document_form" fileUploadListener="#{documentBean.fileSelected(event)}" value="#{documentBean.document_file}">
 
-                                                  </p:fileUpload>>
+                                                  </p:fileUpload>
                                                 </span>
 
                                               </div>
@@ -184,7 +186,7 @@
                                                 </div>
                                               </h:panelGroup>
 
-                                              <p:commandButton value="Submit" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
+                                              <p:commandButton value="Bitir" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
                                               </p:commandButton>
                                             </h:form>
                                           </div>
@@ -313,7 +315,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-6 " >
-                <h1 class="text-muted lead">Son Eklenen Dökümanlar</h1>
+                <h2 class="text-muted lead">Son Eklenen Dökümanlar</h2>
               </div>
               <div class="col-md-6">
                 <ul class="breadcrumb">
@@ -326,8 +328,7 @@
             </div>
           </div>
         </div>
-
-        <div id="content">
+        <div id="content" style="background: #e9ecf2; padding-top: 30px;">
           <div class="container">
 
 
@@ -348,7 +349,7 @@ ______________________________________________________ -->
                       <!-- /.col-md-4 -->
 
                       <ui:repeat var="doc" value="#{documentBean.document_list}">
-                        <div class="col-md-4 col-sm-6">
+                        <div  class="col-md-4 col-sm-6" style="background: white;">
                           <div class="box-image-text blog">
                             <div class="top">
                               <div class="image">
@@ -414,8 +415,8 @@ ______________________________________________________ -->
 _________________________________________________________ -->
                 <div class="panel panel-default sidebar-menu">
 
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Kategoriler</h3>
+                  <div class="panel-heading" style="padding-left: 10px; padding-top: 20px;">
+                    <h3 class="panel-title" >  Kategoriler</h3>
                   </div>
 
                   <div class="panel-body"><h:form>
@@ -476,11 +477,11 @@ _________________________________________________________ -->
 
                 <div class="panel panel-default sidebar-menu">
 
-                  <div class="panel-heading">
+                  <div class="panel-heading" style="padding-left: 10px; padding-top: 4px;">
                     <h3 class="panel-title">Dosya Formatları</h3>
                   </div>
 
-                  <div class="panel-body">
+                  <div class="panel-body" style="padding-left: 10px; padding-top: 4px;">
 
                     <h:form id="format">
                       <div class="form-group">
@@ -520,50 +521,6 @@ _________________________________________________________ -->
 
 
 
-        <section class="bar background-pentagon no-mb">
-          <div class="container">
-            <div class="row showcase">
-              <div class="col-md-3 col-sm-6">
-                <div class="item">
-                  <div class="icon"><i class="fa fa-align-justify"></i>
-                  </div>
-                  <h4><span class="counter">#{documentBean.document_list_all.size()}</span><br/>
-
-                    Websites</h4>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="item">
-                  <div class="icon"><i class="fa fa-users"></i>
-                  </div>
-                  <h4><span class="counter">100</span><br/>
-
-                    Satisfied Clients</h4>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="item">
-                  <div class="icon"><i class="fa fa-copy"></i>
-                  </div>
-                  <h4><span class="counter">320</span><br/>
-
-                    Projects</h4>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6">
-                <div class="item">
-                  <div class="icon"><i class="fa fa-font"></i>
-                  </div>
-                  <h4><span class="counter">923</span><br/> 
-
-                    Magazines and Brochures</h4>
-                </div>
-              </div>
-            </div>
-            <!-- /.row -->
-          </div>
-          <!-- /.container -->
-        </section>
 
         <!-- *** FOOTER ***
 _________________________________________________________ -->
@@ -571,9 +528,9 @@ _________________________________________________________ -->
         <footer id="footer">
           <div class="container">
             <div class="col-md-3 col-sm-6">
-              <h4>About us</h4>
+              <h4>Hakkımızda</h4>
 
-              <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+              <p>Araştırmayı ve üretmeyi seven meraklı öğrencileriz.</p>
 
               <hr></hr>
 
@@ -632,22 +589,31 @@ _________________________________________________________ -->
 
               <h4>Contact</h4>
 
-              <p><strong>Universal Ltd.</strong>
-                <br>13/25 New Avenue</br>
-                <br>Newtown upon River</br>
-                <br>45Y 73J</br>
-                <br>England</br>
-                <br></br>
-                <strong>Great Britain</strong>
-              </p>
+              <p>
+                              Süleyman Demirel Üniversitesi <br/>
+                              Çünür Mahallesi <br/>
+                              Süleyman Demirel Caddesi<br/>
+                              Çünür/Isparta<br/>
+                              <strong>Türkiye</strong>
+                            </p>
 
-              <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
+              <a href="contact.html" class="btn btn-small btn-template-main">İletişim Sayfasına Git</a>
 
               <hr class="hidden-md hidden-lg hidden-sm"/>
-
+              
+              
             </div>
-            <!-- /.col-md-3 -->
+            <div class="col-md-3 col-sm-6">
 
+                    
+
+                    <div class="photostream">
+                      <h5>  İlk işimiz ulusu çalışkan yapmaktır.</h5>
+                    </div>
+              <strong style="color:white;"><p>Mustafa Kemal Atatürk</p></strong>
+                </div>
+            <!-- /.col-md-3 -->
+            
 
 
             <!-- /.col-md-3 -->

@@ -7,9 +7,10 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/notehub</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">mehmet</property>
-    <mapping resource="pojos/Resources.hbm.xml"/>
     <mapping resource="pojos/Notes.hbm.xml"/>
+    <mapping resource="pojos/Resources.hbm.xml"/>
     <mapping resource="pojos/Document.hbm.xml"/>
+    <mapping resource="pojos/Log.hbm.xml"/>
     <mapping resource="pojos/Users.hbm.xml"/>
     <mapping resource="pojos/Lectures.hbm.xml"/>
   </session-factory>

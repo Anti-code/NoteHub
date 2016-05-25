@@ -1,0 +1,668 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+<h:head>
+  <title> NoteHub | Döküman Paylaşım Platformu </title>
+    <meta charset="utf-8"/>
+    <meta name="robots" content="all,follow"/>
+    <meta name="googlebot" content="index,follow,snippet,archive"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name = "keywords" content  = ""   />
+    <meta name="keywords" content=""/>
+
+    <!-- Bootstrap and Font Awesome css -->
+    <h:outputStylesheet library="css" name="font-awesome.min.css"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+
+    <!-- Css animations  -->
+    <h:outputStylesheet library="css" name="animate.css" />
+
+    <!-- Theme stylesheet, if possible do not edit this stylesheet -->
+    <h:outputStylesheet library="css" name="style.default.css"  id="theme-stylesheet"/>
+
+    <!-- Custom stylesheet - for your changes -->
+    <h:outputStylesheet library="css" name="custom.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/smartSuggest.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"/>
+    
+    
+    <link href  =  'http://fonts.go ogleapis. c om/css?family=Robo t o: 4 00,100,100italic,300,300italic,500,700,800' rel = 'stylesheet' type = 'text/css' /><!-- Bootstrap and Font Awesome css -->
+   <h:outputStylesheet library = "css" name = "fileupload.css"  /><!-- Theme stylesheet, if possible do not edit this stylesheet -->
+    
+
+</h:head>
+  <f:view>
+<h:body>
+<header>
+          <!-- *** NAVBAR ***
+  _________________________________________________________ -->
+
+          <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+            <div class="navbar navbar-default yamm" style="background-color: #fff; border-color:#fff; margin-bottom: 5px; padding-bottom: 2px;" role="navigation" id="navbar">
+
+              <div class="container">
+
+
+                <!--/.navbar-header -->
+
+                <div class="navbar-collapse collapse" id="navigation">
+                  <h:form enctype="multipart/form-data">
+                    <ul class="nav navbar-nav navbar-left">
+                      <li ><h:commandLink  action="#{documentBean.loadLatest()}"><h2  style="font: italic bold 35px/35px Georgia, serif; margin-bottom: 5px; padding-bottom: 5px; position: fixed; top: -10px;  color:#38a7bb;"><span class="hidden-xs hidden-sm"  ></span>
+                        NoteHub</h2></h:commandLink>
+                        </li>
+</ul>
+                    <ul class="nav navbar-nav navbar-right">
+
+                      <li class="btn-default" >
+
+                        <h:commandLink action="#{documentBean.loadLatest()}" class="btn-default" >Anasayfa</h:commandLink>
+
+                      </li>
+
+                      <!-- ========== FULL WIDTH MEGAMENU ================== -->
+                      <li class="dropdown use-yamm yamm-fw">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Tüm Dersler <b class="caret"></b></a>
+                        <ul class="dropdown-menu" >
+                          <li>
+
+                            <div class="yamm-content">
+                              <div class="row">
+                                <div class="col-sm-3">
+                                  <h5>1.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec1" value="#{lectureBean.lecture_list1}">
+                                      <li><h:commandLink value="#{lec1.name}" action="#{documentBean.documentByLecture(lec1.lectureId)}" >
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+
+
+                                </div>
+                                <div class="col-sm-3">
+                                  <h5>2.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec2" value="#{lectureBean.lecture_list2}">
+                                      <li><h:commandLink value="#{lec2.name}" action="#{documentBean.documentByLecture(lec2.lectureId)}" >
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+
+                                </div>
+                                <div class="col-sm-3">
+                                  <h5>3.Sınıf</h5>
+
+                                  <ul>
+                                    <ui:repeat var="lec3" value="#{lectureBean.lecture_list3}">
+                                      <li><h:commandLink value="#{lec3.name}" action="#{documentBean.documentByLecture(lec3.lectureId)}" >
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+                                </div>
+                                <div class="col-sm-3">
+                                  <h5>4.Sınıf</h5>
+                                  <ul>
+                                    <ui:repeat var="lec4" value="#{lectureBean.lecture_list4}">
+                                      <li><h:commandLink value="#{lec4.name}" action="#{documentBean.documentByLecture(lec4.lectureId)}" >
+
+
+                                        </h:commandLink>
+                                      </li>
+                                    </ui:repeat>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /.yamm-content -->
+                          </li>
+                        </ul>
+                      </li>
+                      <!-- ========== FULL WIDTH MEGAMENU END ================== -->
+
+                      <li class="dropdown "  >
+                        <a id="root"  class="dropdown-toggle" data-toggle="dropdown" data-target="#root" >Katkıda Bulun<b class="caret"></b></a>
+                        <ul class="dropdown-menu file-width"  >
+                          <li>
+                            <div class="yamm-content">
+                              <div class="row">
+
+                                <div class="col-md-12">
+                                  <h5><strong>Döküman Ekleme</strong></h5>
+                                 
+                                      <div class="file-container">
+                                        <div class="panel panel-default">
+                                          <div class="panel-body">
+
+                                            <!-- Standar Form -->
+
+                                            <h:form id="document_form" enctype="multipart/form-data">
+
+                                              <div class = "form-group">
+                                                <label for = "name">Başlık</label>
+                                                <h:inputTextarea  class = "form-control no-collapsable" value="#{documentBean.doc_info}" rows = "3"></h:inputTextarea>
+                                                <br/>
+                                                <p:growl id="messages" showDetail="true" />
+                                                <label for = "name">Ders</label>
+                                                <h:selectOneMenu class="form-control no-collapsable" value="#{documentBean.secilen}">
+                                                  <f:selectItems value="#{lectureBean.lecture_list_all}" var="lec" itemLabel="#{lec.name}" itemValue="#{lec.lectureId}" ></f:selectItems>
+                                                </h:selectOneMenu>
+
+
+                                                <br/>
+
+
+
+                                                <span class="btn btn-default btn-file" style="width: 100%">Eklenecek Dökümanı Seç
+                                                  <p:fileUpload class="form-control no-collapsable" mode="simple" process="@form" update="document_form" fileUploadListener="#{documentBean.fileSelected(event)}" value="#{documentBean.document_file}">
+
+                                                  </p:fileUpload>
+                                                </span>
+
+                                              </div>
+
+                                              <h:panelGroup id="outputMessage" class="no-collapsable" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
+                                                <div class="js-upload-finished">
+
+                                                  <div class="list-group">
+                                                    <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
+                                                  </div>
+                                                </div>
+                                              </h:panelGroup>
+
+                                              <p:commandButton value="Bitir" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-sm btn-primary" id="js-upload-submit" style="width: 100%">
+                                              </p:commandButton>
+                                            </h:form>
+                                          </div>
+                                        </div>
+                                      </div> <!-- /container -->
+                                    
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </li>
+
+
+
+
+
+                      <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><h:outputText value="#{userBean.login_user.name}" /><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="#{userBean.profile()}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                          </li>
+
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope">Mesajlar</i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu message-dropdown">
+                              <li class="message-preview">
+                                <a href="#">
+                                  <div class="media">
+                                    <span class="pull-left">
+                                      <img class="media-object" src="http://placehold.it/50x50" alt=""/>
+                                    </span>
+                                    <div class="media-body">
+                                      <h5 class="media-heading"><strong>John Smith</strong>
+                                      </h5>
+                                      <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                      <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                  </div>
+                                </a>
+                              </li>
+                              <li class="message-footer">
+                                <a href="#">Read All New Messages</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li class="dropdown-toggle">
+                            <a  class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell">Bildirimler</i> <b class="caret"></b></a>
+                            <ul class="dropdown-menu alert-dropdown">
+                              <li>
+                                <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                              </li>
+                              <li>
+                                <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="#">View All</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                            <h:outputLink value="#{userBean.logout()}" ><i class="fa fa-fw fa-power-off"></i> Log Out</h:outputLink>
+                          </li>
+                        </ul>
+
+                      </li>
+
+                    </ul>
+
+                  </h:form>
+                </div>
+                <!--/.nav-collapse -->
+
+
+
+                <div class="collapse clearfix" id="search">
+
+                  <h:form class="navbar-form" role="search">
+                    <div class="input-group">
+                      <h:inputText value="#{noteBean.search()}" />
+                      <span class="input-group-btn">
+                        <h:commandButton value="#{noteBean.search()}" styleClass="btn btn-template-main"></h:commandButton>
+                      </span>
+                    </div>
+                  </h:form>
+
+                </div>
+                <!--/.nav-collapse -->
+
+              </div>
+
+
+            </div>
+            <!-- /#navbar -->
+
+          </div>
+
+          <!-- *** NAVBAR END *** -->
+
+        </header>
+
+    <div id="all">
+        
+
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading">
+                                <h2>NoteHub'dan Kimler Sorumlu?</h2>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <div id="content" class="clearfix" >
+<div class="container" id="contact">
+                  
+                <div class="row">
+                  
+                    <div class="col-md-8">
+                      <section>
+                        <br/>
+                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
+                                ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+
+                    <div class="row">
+                      
+                        <div class="col-md-3 col-sm-3 animated fadeInUp" data-animate="fadeInUp" style="opacity: 0; margin-left: auto; margin-right: auto; display: block;">
+                            
+                          <div class="team-member" >
+                                <div class="image">
+                                    <a href="team-member.html"  >
+                                        <img src="../resources/img/hicran.png" alt="" class="img-responsive img-circle"/>
+                                    </a>
+                                </div>
+                                <h3><a href="team-member.html">Hicran Gümüşbaş</a></h3>
+                                <p class="role">CTO</p>
+
+                                <div class="social">
+                                    <a href="#" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" class="external gplus" data-animate-hover="pulse"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                                </div>
+                                <div class="text">
+                                    <p>NoteHub'un kurucusu. Birçok önemli projeye önderlik eden kadın yazılımcı.</p>
+                                </div>
+                            </div>
+                            <!-- /.team-member -->
+                        </div>
+                        
+                        <div class="col-md-3 col-sm-3 animated fadeInUp" data-animate="fadeInUp" style="opacity: 0;">
+                            <div class="team-member">
+                                <div class="image">
+                                    <a href="team-member.html">
+                                        <img src="../resources/img/self.jpg" alt="" class="img-responsive img-circle"/>
+                                    </a>
+                                </div>
+                                <h3><a href="team-member.html">Mehmet Gürdal</a></h3>
+                                <p class="role">Developer</p>
+                                <div class="social">
+                                    <a href="#" class="external facebook" data-animate-hover="pulse" style="opacity: 1;"><i class="fa fa-facebook"></i></a>
+                                    <a href="#" class="external gplus" data-animate-hover="pulse" style="opacity: 1;"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" class="external twitter" data-animate-hover="pulse" style="opacity: 1;"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" class="email" data-animate-hover="pulse" style="opacity: 1;"><i class="fa fa-envelope"></i></a>
+                                </div>
+                                <div class="text">
+                                    <p>Süleyman Demirel Üniversitesinde öğrenci. Veri analizi, web programlama ve ekonomi ilgi alanları.</p>
+                                </div>
+                            </div>
+                            <!-- /.team-member -->
+                        </div>
+                    </div>
+                </section>
+                        <section>
+
+                            <div class="heading">
+                                <h2>Size yardım etmek için burdayız.</h2>
+                            </div>
+
+                            <p class="lead">Aklınızda bir soru mu var? Web sitesi ile ilgili sorunlar mı yaşıyorsunuz? Geliştirici ekibimize sorularınızı çekinmeden sorabilirsiniz. Ayrıca site hakkındaki fikirleriniz bizim için çok değerli.</p>
+                            <p>Lütfen hiç çekinmeden bizimle iletişime geçin, Sizin için 7/24 çalışıyoruz.</p>
+
+                            <div class="heading">
+                                <h3>iletişim Formu</h3>
+                            </div>
+
+                            <form>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="firstname">İsim</label>
+                                            <input type="text" class="form-control" id="firstname"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="lastname">Soyisim</label>
+                                            <input type="text" class="form-control" id="lastname"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="text" class="form-control" id="email"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="subject">Konu</label>
+                                            <input type="text" class="form-control" id="subject"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="message">Mesaj</label>
+                                            <textarea id="message" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 text-center">
+                                        <button type="submit" class="btn btn-template-main"><i class="fa fa-envelope-o"></i> Gönder</button>
+
+                                    </div>
+                                </div>
+                                <!-- /.row -->
+                            </form>
+
+                        </section>
+                        
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <section>
+
+                            <h3 class="text-uppercase">Address</h3>
+
+                            <p>
+                              Süleyman Demirel Üniversitesi <br/>
+                              Çünür Mahallesi <br/>
+                              Süleyman Demirel Caddesi<br/>
+                              Çünür/Isparta<br/>
+                              <strong>Türkiye</strong>
+                            </p>
+
+                            
+
+
+
+                            <h3 class="text-uppercase">Online Destek</h3>
+
+                            <p class="text-muted">Lütfen bize email atın veya bizi arayın.</p>
+                            <ul>
+                                <li><strong><a href="mailto:">notehubenterprise@gmail.com</a></strong>
+                                </li>
+                                <li><strong>Tel</strong>  +90 512 323 2342</li>
+                            </ul>
+
+                        </section>
+                        
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+
+            </div>
+           
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->
+
+
+        <!-- *** GET IT ***
+_________________________________________________________ -->
+
+        <div id="get-it">
+            <div class="container">
+                <div class="col-md-8 col-sm-12">
+                    <h3></h3>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <!-- *** GET IT END *** -->
+
+
+        <!-- *** FOOTER ***
+_________________________________________________________ -->
+
+        <footer id="footer">
+            <div class="container">
+                <div class="col-md-3 col-sm-6">
+                    <h4>About us</h4>
+
+                    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+                    <hr/>
+
+                    <h4>Join our monthly newsletter</h4>
+
+                    <form>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control"></input>
+
+                            <span class="input-group-btn">
+
+                        <button class="btn btn-default" type="button"><i class="fa fa-send"></i></button>
+
+                    </span>
+
+                        </div>
+                        <!-- /input-group -->
+                    </form>
+
+                    <hr class="hidden-md hidden-lg hidden-sm"/>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Blog</h4>
+
+                    <div class="blog-entries">
+                        <div class="item same-height-row clearfix">
+                            <div class="image same-height-always">
+                                <a href="#">
+                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
+                                </a>
+                            </div>
+                            <div class="name same-height-always">
+                                <h5><a href="#">Blog post name</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="item same-height-row clearfix">
+                            <div class="image same-height-always">
+                                <a href="#">
+                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
+                                </a>
+                            </div>
+                            <div class="name same-height-always">
+                                <h5><a href="#">Blog post name</a></h5>
+                            </div>
+                        </div>
+
+                        <div class="item same-height-row clearfix">
+                            <div class="image same-height-always">
+                                <a href="#">
+                                    <img class="img-responsive" src="img/detailsquare.jpg" alt=""/>
+                                </a>
+                            </div>
+                            <div class="name same-height-always">
+                                <h5><a href="#">Very very long blog post name</a></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="hidden-md hidden-lg"/>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+                <div class="col-md-3 col-sm-6">
+
+                    <h4>Contact</h4>
+
+                    <p><strong>Universal Ltd.</strong>
+                      Süleyman Demirel Üniversitesi, Çünür Mahallesi, Süleyman Demirel Caddesi, 32260 Çünür/Isparta
+                        <br/>13/25 New Avenue
+                        <br/>Newtown upon River
+                        <br/>45Y 73J
+                        <br/>England
+                        <br/>
+                        <strong>Great Britain</strong>
+                    </p>
+
+                    <a href="contact.html" class="btn btn-small btn-template-main">Go to contact page</a>
+
+                    <hr class="hidden-md hidden-lg hidden-sm"/>
+
+                </div>
+                <!-- /.col-md-3 -->
+
+
+
+                <div class="col-md-3 col-sm-6">
+
+                    
+
+                    <div class="photostream">
+                      <h5> Hiçbir şeye ihtiyacımız yok, yalnız bir şeye ihtiyacımız vardır: çalışkan olmak</h5>
+                    </div>
+                      <h4>Mustafa Kemal Atatürk</h4>
+                </div>
+                <!-- /.col-md-3 -->
+                
+            </div>
+          
+            <!-- /.container -->
+        </footer>
+        <!-- /#footer -->
+
+        <!-- *** FOOTER END *** -->
+
+        <!-- *** COPYRIGHT ***
+_________________________________________________________ -->
+
+        <div id="copyright">
+            <div class="container">
+                <div class="col-md-12">
+                    <p class="pull-left">&copy; 2015. Your company / name goes here</p>
+                    <p class="pull-right">Template by <a href="http://bootstrapious.com/free-templates">Bootstrapious</a> 
+                        <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :) -->
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <!-- /#copyright -->
+
+        <!-- *** COPYRIGHT END *** -->
+
+
+
+    </div>
+    <!-- /#all -->
+
+
+    <!-- #### JAVASCRIPT FILES ### -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <script src="resources/js/jquery.cookie.js"></script>
+    <script src="resources/js/waypoints.min.js"></script>
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <script src="resources/js/jquery.parallax-1.1.3.js"></script>
+    <script src="resources/js/front.js"></script>
+
+    
+
+
+
+</h:body>
+</f:view>
+</html>
