@@ -187,14 +187,7 @@
 
                                               </div>
 
-                                              <h:panelGroup id="outputMessage" class="no-collapsable" styleClass="visibility: #{documentBean.document_file.size gt 0 ? 'visible' : 'hidden'}">
-                                                <div class="js-upload-finished">
-
-                                                  <div class="list-group">
-                                                    <a  class="list-group-item list-group-item-success"><h:outputText   value="#{documentBean.file_name}"/><span class="badge alert-success pull-right">Success</span></a>
-                                                  </div>
-                                                </div>
-                                              </h:panelGroup>
+                        
 
                                               <p:commandButton value="Bitir" ajax="false" actionListener="#{documentBean.upload()}" class="btn btn-template-main "  style="width: 100%; background: #38a7bb; color: white; border-radius: 0.4em;">
                                               </p:commandButton>
@@ -209,11 +202,6 @@
                           </li>
                         </ul>
                       </li>
-
-
-
-
-
                      
                       <li class="btn-default" >
 
@@ -229,23 +217,7 @@
 
                   </h:form>
                 </div>
-                <!--/.nav-collapse -->
-
-
-
-                <div class="collapse clearfix" id="search">
-
-                  <h:form class="navbar-form" role="search">
-                    <div class="input-group">
-                      <h:inputText value="#{noteBean.search()}" />
-                      <span class="input-group-btn">
-                        <h:commandButton value="#{noteBean.search()}" styleClass="btn btn-template-main"></h:commandButton>
-                      </span>
-                    </div>
-                  </h:form>
-
-                </div>
-                <!--/.nav-collapse -->
+               
 
               </div>
 
@@ -314,7 +286,7 @@ ______________________________________________________ -->
                             <div class="content">
 
                               <p class="intro">#{doc.documentInfo}</p>
-                              <p class="author-category">By <a href="#">#{doc.users.name}</a> in #{doc.postDate}<br/> #{doc.lectures.name}
+                              <p class="author-category">By <a href="#">#{doc.users.name}</a> in #{doc.postDate} <p>#{doc.lectures.name}</p>
                               </p>
                             </div>
                           </div>
@@ -333,12 +305,14 @@ ______________________________________________________ -->
 
 
 
-                  <ui:fragment rendered="#{documentBean.document_list.size() gt 8}">
+                  <ui:fragment rendered="#{documentBean.document_list.size() gt 5 }">
                     <div class="pages">
 
                       <p class="loadMore">
                         <p:commandLink  value="Daha Fazla" action="#{documentBean.loadMore()}" ajax="true" update="content-table" class="btn btn-template-main"> </p:commandLink>
                       </p>
+                     <!-- <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+-->
 
 
                     </div>
@@ -441,7 +415,7 @@ _________________________________________________________ -->
                                           itemLabel="#{doc_format}"
                                           itemLabelEscaped="true"/>
                         </h:selectManyCheckbox>
-
+                        <br/>
                         <p:commandButton value="Uygula" class="btn btn-default btn-sm btn-template-main" ajax="false" action="#{documentBean.documentByFormat()}"> </p:commandButton>
                       </div>
                     </h:form>
@@ -573,6 +547,26 @@ _________________________________________________________ -->
           $('.no-collapsable').on('click', function (e) {
             e.stopPropagation();
           });
+          $(document).ready(function(){
+     $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('#back-to-top').fadeIn();
+            } else {
+                $('#back-to-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-to-top').click(function () {
+            $('#back-to-top').tooltip('hide');
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+        
+        $('#back-to-top').tooltip('show');
+
+});
         </script>
       </f:verbatim>
       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

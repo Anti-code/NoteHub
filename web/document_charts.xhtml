@@ -79,11 +79,10 @@
 
         <div class="row">
           <div class="col-lg-12">
-
+                    <h2 class="page-header">Dökümanlar</h2>
 
           </div>
         </div><!--/.row-->
-        <br/><hr/><br/>
         <div class="row">
           <div class="col-md-12 ">
             <div class="box">
@@ -155,6 +154,10 @@
 
           </div>
 
+        </div>
+        <div class="panel">
+          <div class="panel-heading">Ders Bazında Döküman Sayısı</div>
+           <div id="chart_div" style="width: 900px; height: 500px;"></div>
         </div>
         <div class="panel">
           <div class="panel-heading">Genel Varyans</div>
@@ -251,7 +254,27 @@
           var chart_line = new google.charts.Line(document.getElementById('line_top_x'));
 
           chart_line.draw(data_line, options_line);
-        }
+          
+          
+        // Some raw data (not necessarily accurate)
+        var data_bar = google.visualization.arrayToDataTable([
+          [ 'Algoritma ve Programlama' ,'Lineer Cebir' ,'Fizik 1' ,'Matematik I' ,'İngilizce I' ,'Atatürk İlkeleri ve İnkılap Tarihi I' ,'Ayrık Matematik' ,'Programlama Dilleri I' ,'Grafik ve Animasyon' ,'Fizik II' ,'Matematik II' ,'İngilizce II' ,'Atatürk İlkeleri ve İnkılap Tarihi II' ,'Türk Dili II' ,'Diferansiyel Denklemler' ,'Elektrik Devre Temelleri' ,'Lojik Devreler I' ,'Veri Yapıları ve Algoritmaları' ,'Elektronik Devreler' ,'Fizik II' ,'Veritabanı Yönetimi' ,'Nümerik Analiz' ,'Staj I' ,'Olasılık Teorisi ve İstatistik' ,'Mikroişlemciler' ,'Veri İletişimi' ,'Yazılım Mühendisliği' ,'İşletim Sistemleri' ,'Görüntü İşlemenin Temelleri' ,'Mobil Programlama' ,'Bilgisayar Ağları' ,'Bilgisayar Mimarisi' ,'Web Teknolojileri ve Programlama' ,'Nesneye Dayalı Analiz ve Modelleme' ,'Sistem Programlama' ,'Mesleki Yabancı Dil I' ,'Yabancı Dilde Okuma ve Konuşma' ,'İleri Grafik Uygulamaları - S1' ,'Yapay Zeka - S2' ,'Biçimsel Diller ve Otomatlar - S4' ,'Mesleki Yabancı Dil II' ,'İleri Programlama - S2' ,'Optimizasyon Algoritmaları - S3'],
+          [ #{lectureBean.docAmounts()}]
+         
+      ]);
+
+    var options_bar = {
+      vAxis: {title: 'Döküman Sayısı'},
+      hAxis: {title: 'Ders'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
+    };
+
+    var chart_bar = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart_bar.draw(data_bar, options_bar);
+  }
+          
+        
         </script></f:verbatim>
 
 

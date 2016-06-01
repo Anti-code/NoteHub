@@ -18,6 +18,11 @@
             30
         </session-timeout>
     </session-config>
+    <listener>
+        <listener-class>
+            beans.SessionCounter
+        </listener-class>
+    </listener>
    
     <welcome-file-list>
         <welcome-file>login.xhtml</welcome-file>

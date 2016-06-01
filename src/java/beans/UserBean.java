@@ -122,7 +122,7 @@ public class UserBean implements Serializable {
 
   }
   public String profile(){
-    return "customer-account.xhtml  ";
+    return "customer-account.xhtml?faces-redirect=true";
   }
   public void updateUser(){
     if(hibernate_session.getTransaction().isActive()){
@@ -180,9 +180,10 @@ public class UserBean implements Serializable {
     return null;
   }
 
-  public String logout() {
+  public void logout() {
     isLoggedIn=false;
-    return getRequest().getContextPath()+"/login.xhtml?faces-redirect=true";
+    this.login_user=null;
+    System.out.println(getRequest().getContextPath());
   }
 public String adminLogout() {
     isLoggedIn=false;
@@ -288,4 +289,5 @@ public String adminLogout() {
   public void setUser_activity(String[][] user_activity) {
     this.user_activity = user_activity;
   }
+
 }

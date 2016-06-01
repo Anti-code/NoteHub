@@ -103,7 +103,31 @@ public class LectureBean implements Serializable{
         
         return l;
     }
-
+    
+    public String docAmounts(){
+      String d="";
+      for(Lectures l: getLecture_list_all()){
+        if(getLecture_list_all().indexOf(l)==0){
+        d=d.concat(" "+l.getDocuments().size());
+        continue;
+        }
+        d=d.concat(" ,"+l.getDocuments().size());
+      }
+      System.out.println(d);
+      return d;
+    }
+    public String lectsToString(){
+      String d="";
+      for(Lectures l: getLecture_list_all()){
+        if(getLecture_list_all().indexOf(l)==0){
+        d=d.concat(" "+"\'"+l.getName()+"\'");
+        continue;
+        }
+        d=d.concat(" ,"+"\'"+l.getName()+"\'");
+      }
+      System.out.println(d);
+      return d;
+    }
     public void setLecture_list_all(List<Lectures> lecture_list_all) {
         this.lecture_list_all = lecture_list_all;
     }

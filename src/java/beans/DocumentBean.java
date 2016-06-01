@@ -75,7 +75,7 @@ public class DocumentBean implements Serializable{
         session=hibernate_util.getSessionFactory().openSession();
         
      this.doc_index=6;
-     loadMore();
+     loadLatest();
         
   }
   public String loadLatest(){
@@ -84,11 +84,15 @@ public class DocumentBean implements Serializable{
       }
     session.beginTransaction();
     Query q=session.createQuery("from Document as d  ORDER BY d.postDate DESC");
-    q.setMaxResults(10);
+    q.setMaxResults(6);
     document_list=q.list();
     session.getTransaction().commit();
     return "index.xhtml?faces-redirect=true";
   }
+  
+  
+
+
   public List<String> listToSet(){
     Set<String> s =new ArraySet();
     List<String> format_list = new ArrayList<>();
@@ -222,7 +226,7 @@ public class DocumentBean implements Serializable{
         session.getTransaction().commit();
      return  l2.size();
     }
-    public String upload() {
+    public void upload() {
         if(document_file != null) {
             try (InputStream input = document_file.getInputstream()){
                 
@@ -249,11 +253,10 @@ public class DocumentBean implements Serializable{
                   transaction.rollback();
                   throw e;
                 }
-                
+                loadLatest();
                 
                 FacesMessage message = new FacesMessage("Dosya başarıyla eklendi");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                return "index.xhtml?faces-redirect=true";
             } catch (IOException e) {
               if(e instanceof  FileAlreadyExistsException){
                 FacesMessage message = new FacesMessage("Bu döküman daha önce eklenmiş.");
@@ -263,7 +266,6 @@ public class DocumentBean implements Serializable{
             }
             
         }
-        return null;
     }
     public void export(String path) throws IOException {
         System.out.println(path);
@@ -424,5 +426,6 @@ public class DocumentBean implements Serializable{
        session.getTransaction().commit();
        System.out.println("Success");
      }
+     
      
 }
